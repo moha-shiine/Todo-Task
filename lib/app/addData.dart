@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:intl/intl.dart';
 
-class DateTimePickerExample extends StatefulWidget {
+class DateTimePickerWithStartEndTime extends StatefulWidget {
   @override
-  _DateTimePickerExampleState createState() => _DateTimePickerExampleState();
+  _DateTimePickerWithStartEndTimeState createState() =>
+      _DateTimePickerWithStartEndTimeState();
 }
 
-class _DateTimePickerExampleState extends State<DateTimePickerExample> {
+class _DateTimePickerWithStartEndTimeState
+    extends State<DateTimePickerWithStartEndTime> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-  final TextEditingController _dateController = TextEditingController();
-  final TextEditingController _timeController = TextEditingController();
+  final TextEditingController _dateTimeController = TextEditingController();
+  final TextEditingController _startTimeController = TextEditingController();
+  final TextEditingController _endTimeController = TextEditingController();
 
-  // Function for Date Picker
-  Future<void> _pickDate(BuildContext context) async {
+  // Function for DateTime Picker
+  Future<void> _pickDateTime(BuildContext context) async {
     DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -23,14 +25,31 @@ class _DateTimePickerExampleState extends State<DateTimePickerExample> {
     );
 
     if (pickedDate != null) {
-      setState(() {
-        _dateController.text = DateFormat('dd MMM yyyy').format(pickedDate);
-      });
+      TimeOfDay? pickedTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+      );
+
+      if (pickedTime != null) {
+        DateTime finalDateTime = DateTime(
+          pickedDate.year,
+          pickedDate.month,
+          pickedDate.day,
+          pickedTime.hour,
+          pickedTime.minute,
+        );
+
+        setState(() {
+          _dateTimeController.text =
+              DateFormat('dd MMM yyyy, hh:mm a').format(finalDateTime);
+        });
+      }
     }
   }
 
   // Function for Time Picker
-  Future<void> _pickTime(BuildContext context) async {
+  Future<void> _pickTime(
+      BuildContext context, TextEditingController timeController) async {
     TimeOfDay? pickedTime = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
@@ -47,7 +66,7 @@ class _DateTimePickerExampleState extends State<DateTimePickerExample> {
       );
 
       setState(() {
-        _timeController.text = DateFormat('hh:mm a').format(fullTime);
+        timeController.text = DateFormat('hh:mm a').format(fullTime);
       });
     }
   }
@@ -67,6 +86,7 @@ class _DateTimePickerExampleState extends State<DateTimePickerExample> {
               controller: _titleController,
               decoration: InputDecoration(
                 hintText: "Title",
+
                 border: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(12)),
@@ -79,7 +99,7 @@ class _DateTimePickerExampleState extends State<DateTimePickerExample> {
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(12)),
-                // prefixIcon: Icon(IconlyLight.)
+                //  suffixIcon: Icon(Icons.access_time),
               ),
             ),
             SizedBox(height: 16),
@@ -89,6 +109,7 @@ class _DateTimePickerExampleState extends State<DateTimePickerExample> {
               controller: _descriptionController,
               decoration: InputDecoration(
                 hintText: "Description",
+
                 border: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(12)),
@@ -101,17 +122,19 @@ class _DateTimePickerExampleState extends State<DateTimePickerExample> {
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(12)),
+                // suffixIcon: Icon(Icons.access_time),
               ),
               maxLines: 3,
             ),
             SizedBox(height: 16),
 
-            // Date Picker Field
+            // Date & Time Picker Field
             TextField(
-              controller: _dateController,
+              controller: _dateTimeController,
               readOnly: true,
               decoration: InputDecoration(
-                hintText: "Pick a Date",
+                hintText: "Pick Date & Time",
+
                 border: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(12)),
@@ -124,18 +147,33 @@ class _DateTimePickerExampleState extends State<DateTimePickerExample> {
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(12)),
-                suffixIcon: Icon(IconlyLight.calendar),
+                // suffixIcon: Icon(Icons.access_time),
+
+                suffixIcon: Icon(Icons.calendar_today),
               ),
-              onTap: () => _pickDate(context),
+              onTap: () => _pickDateTime(context),
             ),
             SizedBox(height: 16),
 
-            // Time Picker Field
+            // Start Time Picker Field
             TextField(
-              controller: _timeController,
+              controller: _startTimeController,
               readOnly: true,
               decoration: InputDecoration(
-                hintText: "Pick a Time",
+                hintText: "Pick Start Time",
+                border: OutlineInputBorder(),
+                suffixIcon: Icon(Icons.access_time),
+              ),
+              onTap: () => _pickTime(context, _startTimeController),
+            ),
+            SizedBox(height: 16),
+
+            // End Time Picker Field
+            TextField(
+              controller: _endTimeController,
+              readOnly: true,
+              decoration: InputDecoration(
+                hintText: "Pick End Time",
                 border: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(12)),
@@ -150,7 +188,7 @@ class _DateTimePickerExampleState extends State<DateTimePickerExample> {
                     borderRadius: BorderRadius.circular(12)),
                 suffixIcon: Icon(Icons.access_time),
               ),
-              onTap: () => _pickTime(context),
+              onTap: () => _pickTime(context, _endTimeController),
             ),
             SizedBox(height: 20),
 
@@ -159,13 +197,15 @@ class _DateTimePickerExampleState extends State<DateTimePickerExample> {
               onPressed: () {
                 final title = _titleController.text;
                 final description = _descriptionController.text;
-                final date = _dateController.text;
-                final time = _timeController.text;
+                final dateTime = _dateTimeController.text;
+                final startTime = _startTimeController.text;
+                final endTime = _endTimeController.text;
 
                 if (title.isEmpty ||
                     description.isEmpty ||
-                    date.isEmpty ||
-                    time.isEmpty) {
+                    dateTime.isEmpty ||
+                    startTime.isEmpty ||
+                    endTime.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text("Please fill out all fields!"),
@@ -176,7 +216,7 @@ class _DateTimePickerExampleState extends State<DateTimePickerExample> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
-                        "Submitted:\nTitle: $title\nDescription: $description\nDate: $date\nTime: $time",
+                        "Submitted:\nTitle: $title\nDescription: $description\nDate & Time: $dateTime\nStart Time: $startTime\nEnd Time: $endTime",
                       ),
                       backgroundColor: Colors.green,
                     ),
@@ -189,5 +229,15 @@ class _DateTimePickerExampleState extends State<DateTimePickerExample> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _descriptionController.dispose();
+    _dateTimeController.dispose();
+    _startTimeController.dispose();
+    _endTimeController.dispose();
+    super.dispose();
   }
 }

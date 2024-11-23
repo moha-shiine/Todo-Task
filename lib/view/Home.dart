@@ -138,8 +138,10 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: InkWell(
         onTap: () {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => DateTimePickerExample()));
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => DateTimePickerWithStartEndTime()));
         },
         child: Container(
           height: 77,

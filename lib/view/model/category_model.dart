@@ -21,3 +21,4 @@ class categoryMoldel {
 //   categoryMoldel(icon: Icons.favorite, label: "Fovraite"),
 //   categoryMoldel(icon: IconlyLight.profile, label: "Personal"),
 // ];
+
