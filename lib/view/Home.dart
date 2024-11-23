@@ -2,6 +2,7 @@ import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:gap/gap.dart';
+import 'package:taskapp/app/addData.dart';
 import 'package:taskapp/color/them.dart';
 import 'package:taskapp/common/headerwidget.dart';
 
@@ -136,21 +137,24 @@ class _HomeScreenState extends State<HomeScreen> {
       ]),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: InkWell(
-        onTap: () {},
-        child: Material(borderRadius: ,
-          child: Container(
-            height: 70,
-            width: 70,
-            decoration: BoxDecoration(
-                border: Border.all(
-                    width: 8, color: Colorthem.SecondryColor.withOpacity(0.2)),
-                color: Colorthem.SecondryColor,
-                borderRadius: BorderRadius.circular(100)),
-            child: Icon(
-              Icons.add,
-              color: Colorthem.thirtColor,
-              size: 33,
-            ),
+        onTap: () {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => DateTimePickerExample()));
+        },
+        child: Container(
+          height: 77,
+          width: 77,
+          decoration: BoxDecoration(
+              border: Border.all(
+                  width: 8,
+                  color: const Color.fromARGB(255, 201, 176, 255)
+                      .withOpacity(0.2)),
+              color: Colorthem.SecondryColor,
+              borderRadius: BorderRadius.circular(100)),
+          child: Icon(
+            Icons.add,
+            color: Colorthem.thirtColor,
+            size: 33,
           ),
         ),
       ),
