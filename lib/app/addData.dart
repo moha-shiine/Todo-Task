@@ -129,12 +129,38 @@ class _DateTimePickerWithStartEndTimeState
             SizedBox(height: 16),
 
             // Date & Time Picker Field
+            // TextField(
+            //   controller: _dateTimeController,
+            //   readOnly: true,
+            //   decoration: InputDecoration(
+            //     hintText: "Pick Date & Time",
+
+            //     border: OutlineInputBorder(
+            //         borderSide: BorderSide.none,
+            //         borderRadius: BorderRadius.circular(12)),
+            //     enabled: true,
+            //     enabledBorder: OutlineInputBorder(
+            //         borderSide: BorderSide.none,
+            //         borderRadius: BorderRadius.circular(12)),
+            //     fillColor: Colors.grey.shade300,
+            //     filled: true,
+            //     focusedBorder: OutlineInputBorder(
+            //         borderSide: BorderSide.none,
+            //         borderRadius: BorderRadius.circular(12)),
+            //     // suffixIcon: Icon(Icons.access_time),
+
+            //     suffixIcon: Icon(Icons.calendar_today),
+            //   ),
+            //   onTap: () => _pickDateTime(context),
+            // ),
+            SizedBox(height: 16),
+
+            // Start Time Picker Field
             TextField(
-              controller: _dateTimeController,
+              controller: _startTimeController,
               readOnly: true,
               decoration: InputDecoration(
-                hintText: "Pick Date & Time",
-
+                hintText: "Pick Start Time",
                 border: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(12)),
@@ -147,21 +173,6 @@ class _DateTimePickerWithStartEndTimeState
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(12)),
-                // suffixIcon: Icon(Icons.access_time),
-
-                suffixIcon: Icon(Icons.calendar_today),
-              ),
-              onTap: () => _pickDateTime(context),
-            ),
-            SizedBox(height: 16),
-
-            // Start Time Picker Field
-            TextField(
-              controller: _startTimeController,
-              readOnly: true,
-              decoration: InputDecoration(
-                hintText: "Pick Start Time",
-                border: OutlineInputBorder(),
                 suffixIcon: Icon(Icons.access_time),
               ),
               onTap: () => _pickTime(context, _startTimeController),
