@@ -3,7 +3,6 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:gap/gap.dart';
 
 import '../color/them.dart';
-import '../view/model/category_model.dart';
 import 'category.dart';
 
 class HeaderWidget extends StatelessWidget {
