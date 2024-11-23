@@ -137,18 +137,20 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: InkWell(
         onTap: () {},
-        child: Container(
-          height: 80,
-          width: 80,
-          decoration: BoxDecoration(
-              border: Border.all(
-                  width: 8, color: Colorthem.SecondryColor.withOpacity(0.2)),
-              color: Colorthem.SecondryColor,
-              borderRadius: BorderRadius.circular(100)),
-          child: Icon(
-            Icons.add,
-            color: Colorthem.thirtColor,
-            size: 33,
+        child: Material(borderRadius: ,
+          child: Container(
+            height: 70,
+            width: 70,
+            decoration: BoxDecoration(
+                border: Border.all(
+                    width: 8, color: Colorthem.SecondryColor.withOpacity(0.2)),
+                color: Colorthem.SecondryColor,
+                borderRadius: BorderRadius.circular(100)),
+            child: Icon(
+              Icons.add,
+              color: Colorthem.thirtColor,
+              size: 33,
+            ),
           ),
         ),
       ),
