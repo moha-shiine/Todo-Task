@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 
 import '../color/them.dart';
 import '../view/model/category_model.dart';
+import 'category.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({super.key});
@@ -105,22 +106,35 @@ class HeaderWidget extends StatelessWidget {
             ),
 
             Gap(20),
-
-            Column(
-              children:
-                  iconList.map((iconModel) {
-                    return Container(
-                      height: 50,
-                      width: 50,
-                      margin: EdgeInsets.all(4), // Spacing between items
-                      decoration: BoxDecoration(
-                        color: iconModel.color,
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Icon(iconModel.icon, color: Colors.white),
-                    );
-                  }).toList(),
-            ),
+            category(),
+            // Row(
+            //   children:
+            //       taskList.map((task) {
+            //         return Column(
+            //           children: [
+            //             Container(
+            //               height: 50,
+            //               width: 50,
+            //               decoration: BoxDecoration(
+            //                 color: task.color,
+            //                 borderRadius: BorderRadius.circular(4),
+            //               ),
+            //               child: Icon(task.icon, color: Colors.white),
+            //             ),
+            //             SizedBox(
+            //               height: 8,
+            //             ), // Space between the container and the label
+            //             Text(
+            //               task.label,
+            //               style: TextStyle(
+            //                 fontSize: 14,
+            //                 fontWeight: FontWeight.bold,
+            //               ),
+            //             ),
+            //           ],
+            //         );
+            //       }).toList(),
+            // ),
           ],
         ),
       ),
