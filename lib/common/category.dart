@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:taskapp/color/them.dart';
 
 import '../view/model/category_model.dart';
 
@@ -10,10 +12,11 @@ class category extends StatefulWidget {
 class _categoryState extends State<category> {
   // Initialize the task list
   List<categoryMoldel> taskList = [
-    categoryMoldel(icon: Icons.filter_alt, label: "All task"),
-    categoryMoldel(icon: Icons.done, label: "Completed"),
-    categoryMoldel(icon: Icons.pending, label: "Pending"),
-    categoryMoldel(icon: Icons.cancel, label: "Cancelled"),
+    categoryMoldel(icon: IconlyLight.filter, label: "All task"),
+    categoryMoldel(icon: Icons.done, label: "Work"),
+    categoryMoldel(icon: IconlyLight.editSquare, label: "Idea"),
+    categoryMoldel(icon: Icons.favorite, label: "Fovraite"),
+    categoryMoldel(icon: IconlyLight.profile, label: "Personal"),
   ];
 
   // Function to handle selection
@@ -27,43 +30,54 @@ class _categoryState extends State<category> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children:
-          taskList.asMap().entries.map((entry) {
-            int index = entry.key;
-            categoryMoldel task = entry.value;
-            return GestureDetector(
-              onTap: () => toggleSelection(index), // Toggle selection on tap
-              child: Column(
-                children: [
-                  Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                      color: task.isSelected ? Colors.white : Colors.green,
-                      borderRadius: BorderRadius.circular(4),
-                      border: Border.all(
-                        color: Colors.black,
-                      ), // Optional border
-                    ),
-                    child: Icon(
-                      task.icon,
-                      color: task.isSelected ? Colors.green : Colors.white,
-                    ),
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+
+      child: Row(
+        children:
+            taskList.asMap().entries.map((entry) {
+              int index = entry.key;
+              categoryMoldel task = entry.value;
+              return GestureDetector(
+                onTap: () => toggleSelection(index), // Toggle selection on tap
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 65,
+                        width: 65,
+                        decoration: BoxDecoration(
+                          color:
+                              task.isSelected
+                                  ? Colors.white
+                                  : Colorthem.PrimaryColor,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: Colors.black,
+                          ), // Optional border
+                        ),
+                        child: Icon(
+                          task.icon,
+                          size: 30,
+                          color: task.isSelected ? Colors.green : Colors.white,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        task.label,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: task.isSelected ? Colors.green : Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    task.label,
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: task.isSelected ? Colors.green : Colors.black,
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }).toList(),
+                ),
+              );
+            }).toList(),
+      ),
     );
   }
 }

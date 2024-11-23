@@ -25,7 +25,7 @@ class HeaderWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Gap(50),
+            Gap(68),
             Row(
               children: [
                 CircleAvatar(
@@ -79,7 +79,7 @@ class HeaderWidget extends StatelessWidget {
                     color: Colorthem.thirtColor,
                   ),
                 ),
-                Gap(10),
+                Gap(17),
                 Container(
                   height: 40,
                   alignment: Alignment.center,
@@ -93,7 +93,7 @@ class HeaderWidget extends StatelessWidget {
                   ),
                   child: Badge.count(
                     count: 1,
-                    smallSize: 12,
+                    smallSize: 5,
                     backgroundColor: Colorthem.PrimaryColor,
                     child: Icon(
                       IconlyBold.notification,
@@ -105,36 +105,8 @@ class HeaderWidget extends StatelessWidget {
               ],
             ),
 
-            Gap(20),
+            Gap(50),
             category(),
-            // Row(
-            //   children:
-            //       taskList.map((task) {
-            //         return Column(
-            //           children: [
-            //             Container(
-            //               height: 50,
-            //               width: 50,
-            //               decoration: BoxDecoration(
-            //                 color: task.color,
-            //                 borderRadius: BorderRadius.circular(4),
-            //               ),
-            //               child: Icon(task.icon, color: Colors.white),
-            //             ),
-            //             SizedBox(
-            //               height: 8,
-            //             ), // Space between the container and the label
-            //             Text(
-            //               task.label,
-            //               style: TextStyle(
-            //                 fontSize: 14,
-            //                 fontWeight: FontWeight.bold,
-            //               ),
-            //             ),
-            //           ],
-            //         );
-            //       }).toList(),
-            // ),
           ],
         ),
       ),

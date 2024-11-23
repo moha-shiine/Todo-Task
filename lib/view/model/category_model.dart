@@ -14,9 +14,10 @@ class categoryMoldel {
   });
 }
 
-List<categoryMoldel> taskList = [
-  categoryMoldel(icon: Icons.filter_alt, label: "All task"),
-  categoryMoldel(icon: Icons.done, label: "Completed"),
-  categoryMoldel(icon: Icons.pending, label: "Pending"),
-  categoryMoldel(icon: Icons.cancel, label: "Cancelled"),
-];
+// List<categoryMoldel> taskList = [
+//   categoryMoldel(icon: IconlyLight.filter, label: "All task"),
+//   categoryMoldel(icon: Icons.done, label: "Work"),
+//   categoryMoldel(icon: Icons.pending, label: "Idea"),
+//   categoryMoldel(icon: Icons.favorite, label: "Fovraite"),
+//   categoryMoldel(icon: IconlyLight.profile, label: "Personal"),
+// ];
