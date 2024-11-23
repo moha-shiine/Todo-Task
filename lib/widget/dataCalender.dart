@@ -1,6 +1,7 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:taskapp/color/them.dart';
 
 Widget dataCalenderWidget(
     {void Function(DateTime)? onDateChange, DateTime? initialDate}) {
@@ -38,11 +39,13 @@ Widget dataCalenderWidget(
           width: 60.0,
           decoration: BoxDecoration(
             //  shape: BoxShape.circle,
-            borderRadius: BorderRadius.circular(50.0),
+            borderRadius: BorderRadius.circular(100),
             color: null,
             border: isSelected || isToday
                 ? Border.all(
-                    color: isSelected ? Colors.yellow : Colors.transparent,
+                    color: isSelected
+                        ? Colorthem.SecondryColor
+                        : Colors.transparent,
                     width: 1,
                   )
                 : null,
@@ -53,7 +56,7 @@ Widget dataCalenderWidget(
               Text(
                 EasyDateFormatter.shortDayName(date, "en_US"),
                 style: TextStyle(
-                  color: isSelected ? Colors.blue : Colors.grey,
+                  color: isSelected ? Colorthem.PrimaryColor : Colors.grey,
                   fontWeight: FontWeight.w600,
                   fontSize: 12.0,
                 ),
@@ -63,7 +66,7 @@ Widget dataCalenderWidget(
                 child: Text(
                   date.day.toString(),
                   style: TextStyle(
-                    color: isSelected ? Colors.blue : Colors.grey,
+                    color: isSelected ? Colorthem.PrimaryColor : Colors.grey,
                     fontWeight: FontWeight.w600,
                     fontSize: 16.0,
                   ),
