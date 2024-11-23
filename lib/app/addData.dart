@@ -111,7 +111,7 @@ class _DateTimePickerExampleState extends State<DateTimePickerExample> {
               controller: _dateController,
               readOnly: true,
               decoration: InputDecoration(
-                labelText: "Pick a Date",
+                hintText: "Pick a Date",
                 border: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(12)),
@@ -135,7 +135,7 @@ class _DateTimePickerExampleState extends State<DateTimePickerExample> {
               controller: _timeController,
               readOnly: true,
               decoration: InputDecoration(
-                labelText: "Pick a Time",
+                hintText: "Pick a Time",
                 border: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(12)),
