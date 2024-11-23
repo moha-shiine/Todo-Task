@@ -66,7 +66,7 @@ class _DateTimePickerExampleState extends State<DateTimePickerExample> {
             TextField(
               controller: _titleController,
               decoration: InputDecoration(
-                labelText: "Title",
+                hintText: "Title",
                 border: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(12)),
