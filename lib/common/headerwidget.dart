@@ -3,6 +3,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:gap/gap.dart';
 
 import '../color/them.dart';
+import '../view/model/category_model.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({super.key});
@@ -105,15 +106,20 @@ class HeaderWidget extends StatelessWidget {
 
             Gap(20),
 
-            // for(i=0, i++)
-            Container(
-              height: 50,
-              width: 50,
-              decoration: BoxDecoration(
-                color: Colorthem.thirtColor,
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: Icon(IconlyLight.filter),
+            Column(
+              children:
+                  iconList.map((iconModel) {
+                    return Container(
+                      height: 50,
+                      width: 50,
+                      margin: EdgeInsets.all(4), // Spacing between items
+                      decoration: BoxDecoration(
+                        color: iconModel.color,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Icon(iconModel.icon, color: Colors.white),
+                    );
+                  }).toList(),
             ),
           ],
         ),
