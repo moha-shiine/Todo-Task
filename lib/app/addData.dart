@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:taskapp/color/them.dart';
 
 class DateTimePickerWithStartEndTime extends StatefulWidget {
   @override
@@ -23,28 +24,6 @@ class _DateTimePickerWithStartEndTimeState
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
     );
-
-    if (pickedDate != null) {
-      TimeOfDay? pickedTime = await showTimePicker(
-        context: context,
-        initialTime: TimeOfDay.now(),
-      );
-
-      if (pickedTime != null) {
-        DateTime finalDateTime = DateTime(
-          pickedDate.year,
-          pickedDate.month,
-          pickedDate.day,
-          pickedTime.hour,
-          pickedTime.minute,
-        );
-
-        setState(() {
-          _dateTimeController.text =
-              DateFormat('dd MMM yyyy, hh:mm a').format(finalDateTime);
-        });
-      }
-    }
   }
 
   // Function for Time Picker
@@ -78,7 +57,7 @@ class _DateTimePickerWithStartEndTimeState
         title: Text("Date & Time Picker Example"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
             // Title Field
@@ -106,6 +85,8 @@ class _DateTimePickerWithStartEndTimeState
 
             // Description Field
             TextField(
+              minLines: 3,
+              // maxLength: 2,
               controller: _descriptionController,
               decoration: InputDecoration(
                 hintText: "Description",
@@ -128,31 +109,6 @@ class _DateTimePickerWithStartEndTimeState
             ),
             SizedBox(height: 16),
 
-            // Date & Time Picker Field
-            // TextField(
-            //   controller: _dateTimeController,
-            //   readOnly: true,
-            //   decoration: InputDecoration(
-            //     hintText: "Pick Date & Time",
-
-            //     border: OutlineInputBorder(
-            //         borderSide: BorderSide.none,
-            //         borderRadius: BorderRadius.circular(12)),
-            //     enabled: true,
-            //     enabledBorder: OutlineInputBorder(
-            //         borderSide: BorderSide.none,
-            //         borderRadius: BorderRadius.circular(12)),
-            //     fillColor: Colors.grey.shade300,
-            //     filled: true,
-            //     focusedBorder: OutlineInputBorder(
-            //         borderSide: BorderSide.none,
-            //         borderRadius: BorderRadius.circular(12)),
-            //     // suffixIcon: Icon(Icons.access_time),
-
-            //     suffixIcon: Icon(Icons.calendar_today),
-            //   ),
-            //   onTap: () => _pickDateTime(context),
-            // ),
             SizedBox(height: 16),
 
             // Start Time Picker Field
@@ -204,37 +160,54 @@ class _DateTimePickerWithStartEndTimeState
             SizedBox(height: 20),
 
             // Submit Button
-            ElevatedButton(
-              onPressed: () {
-                final title = _titleController.text;
-                final description = _descriptionController.text;
-                final dateTime = _dateTimeController.text;
-                final startTime = _startTimeController.text;
-                final endTime = _endTimeController.text;
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
+                width: double.infinity,
+                height: 60,
+                decoration: BoxDecoration(
+                    color: Colorthem.SecondryColor,
+                    borderRadius: BorderRadius.circular(10)),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colorthem.SecondryColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12))),
+                  onPressed: () {
+                    final title = _titleController.text;
+                    final description = _descriptionController.text;
+                    final dateTime = _dateTimeController.text;
+                    final startTime = _startTimeController.text;
+                    final endTime = _endTimeController.text;
 
-                if (title.isEmpty ||
-                    description.isEmpty ||
-                    dateTime.isEmpty ||
-                    startTime.isEmpty ||
-                    endTime.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text("Please fill out all fields!"),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        "Submitted:\nTitle: $title\nDescription: $description\nDate & Time: $dateTime\nStart Time: $startTime\nEnd Time: $endTime",
-                      ),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
-                }
-              },
-              child: Text("Submit"),
+                    if (title.isEmpty ||
+                        description.isEmpty ||
+                        dateTime.isEmpty ||
+                        startTime.isEmpty ||
+                        endTime.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Please fill out all fields!"),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            "Submitted:\nTitle: $title\nDescription: $description\nDate & Time: $dateTime\nStart Time: $startTime\nEnd Time: $endTime",
+                          ),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+                    }
+                  },
+                  child: Text(
+                    "Submit",
+                    style: TextStyle(color: Colorthem.thirtColor),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
