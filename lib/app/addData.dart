@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:taskapp/color/them.dart';
+import 'package:taskapp/widget/dataCalender.dart';
 
 class DateTimePickerWithStartEndTime extends StatefulWidget {
   @override
@@ -54,10 +55,11 @@ class _DateTimePickerWithStartEndTimeState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Date & Time Picker Example"),
+        toolbarHeight: 100,
+        title: dataCalenderWidget(),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
           children: [
             // Title Field
