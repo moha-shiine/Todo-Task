@@ -9,7 +9,6 @@ Widget dataCalenderWidget(
     onDateChange: onDateChange,
     timeLineProps: const EasyTimeLineProps(),
     headerProps: const EasyHeaderProps(
-      centerHeader: true,
       padding: EdgeInsets.only(
         top: 0,
         left: 20,
