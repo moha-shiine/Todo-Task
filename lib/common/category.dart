@@ -29,6 +29,14 @@ class _categoryState extends State<category> {
     });
   }
 
+  int selelctindex = 0;
+  void handleItemTap(int index) {
+    setState(() {
+      selelctindex = index;
+      _showBottomSheet(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -42,117 +50,129 @@ class _categoryState extends State<category> {
             padding: const EdgeInsets.symmetric(horizontal: 6),
             child: Row(
               children: [
-                Headwiget(
+                HeadWidget(
                   icon: IconlyLight.filter,
                   title: "All Task",
-                  onTap: () {
-                    print('Widget tapped!');
-                  },
+                  index: 1,
+                  onTap: handleItemTap,
+                  isSelected: selelctindex == 1,
                 ),
-                Headwiget(
-                  icon: IconlyLight.filter,
-                  title: "All Task",
-                  onTap: () {},
-                ),
-                // Column(
-                //   children: [
-                //     Container(
-                //       height: 65,
-                //       width: 65,
-                //       decoration: BoxDecoration(
-                //         color: task.isSelected
-                //             ? Colors.white
-                //             : Colorthem.PrimaryColor,
-                //         borderRadius: BorderRadius.circular(16),
-                //         border: Border.all(
-                //           color: Colors.black,
-                //         ), // Optional border
-                //       ),
-                //       child: Icon(
-                //         task.icon,
-                //         size: 30,
-                //         color: task.isSelected ? Colors.green : Colors.white,
-                //       ),
-                //     ),
-                //     SizedBox(height: 8),
-                //     Text(
-                //       task.label,
-                //       style: TextStyle(
-                //         fontSize: 14,
-                //         fontWeight: FontWeight.bold,
-                //         color: task.isSelected ? Colors.green : Colors.white,
-                //       ),
-                //     ),
-                //   ],
-                // ),
+                HeadWidget(
+                    icon: IconlyLight.filter,
+                    title: "Cmpelete",
+                    index: 2,
+                    onTap: handleItemTap,
+                    isSelected: selelctindex == 2),
+                HeadWidget(
+                    icon: IconlyLight.filter,
+                    title: "Cmpelete",
+                    index: 3,
+                    onTap: handleItemTap,
+                    isSelected: selelctindex == 3),
               ],
             ),
           ),
         ]));
   }
+
+  void _showBottomSheet(int index) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      isDismissible: true,
+      context: context,
+      builder: (BuildContext context) {
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Container(
+            width: double.infinity,
+            height: MediaQuery.of(context).size.height * 0.8,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Selected Index: $index',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'You tapped on the item with index: $index',
+                  style: const TextStyle(fontSize: 16),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context); // Close the BottomSheet
+                  },
+                  child: const Text('Close'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 }
 
-class Headwiget extends StatefulWidget {
+class HeadWidget extends StatelessWidget {
   final String title;
-  final VoidCallback onTap;
-
   final IconData icon;
-  const Headwiget(
-      {super.key,
-      required this.title,
-      required this.icon,
-      required this.onTap});
+  final int index;
+  final bool isSelected;
+  final ValueChanged<int> onTap;
 
-  @override
-  State<Headwiget> createState() => _HeadwigetState();
-}
+  const HeadWidget({
+    super.key,
+    required this.title,
+    required this.icon,
+    required this.index,
+    required this.isSelected,
+    required this.onTap,
+  });
 
-class _HeadwigetState extends State<Headwiget> {
   @override
   Widget build(BuildContext context) {
-    bool isSelected = false;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        children: [
-          InkWell(
-            onTap: () {
-              setState(() {
-                isSelected = !isSelected; // Toggle selection state
-              });
-              widget.onTap();
-            },
-            child: Container(
+      child: GestureDetector(
+        onTap: () {
+          onTap(index); // Pass the index to parent when tapped
+        },
+        child: Column(
+          children: [
+            Container(
               height: 65,
               width: 65,
               decoration: BoxDecoration(
-                color:
-                    // ignore: dead_code
-                    isSelected ? Colorthem.thirtColor : Colorthem.PrimaryColor,
+                color: isSelected
+                    ? Colors.red
+                    : Colors.white, // Red for selected, white for unselected
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: Colors.black,
-                ), // Optional border
+                border: Border.all(color: Colors.black),
               ),
               child: Icon(
-                widget.icon,
+                icon,
                 size: 30,
-                color:
-                    // ignore: dead_code
-                    isSelected ? Colorthem.PrimaryColor : Colorthem.thirtColor,
+                color: isSelected
+                    ? Colors.white
+                    : Colors
+                        .black, // White icon for selected, black for unselected
               ),
             ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            widget.title,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+            const SizedBox(height: 8),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
