@@ -90,6 +90,7 @@ class _DateTimePickerWithStartEndTimeState
 
                     SizedBox(height: 16),
                     TextFeildWidget(
+                      maxLine: 3,
                       hinText: 'Description',
                       controller: _descriptionController,
                     ),

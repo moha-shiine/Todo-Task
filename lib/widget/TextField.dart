@@ -6,15 +6,21 @@ class TextFeildWidget extends StatelessWidget {
       required this.hinText,
       this.preficicon,
       this.onTap,
-      required this.controller});
+      required this.controller,
+      this.maxLength,
+      this.maxLine});
   final String hinText;
   final IconData? preficicon;
   final VoidCallback? onTap;
   final TextEditingController controller;
+  final int? maxLength;
+  final int? maxLine;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+        maxLines: maxLine,
+        maxLength: maxLength,
         controller: controller,
         readOnly: true,
         decoration: InputDecoration(
