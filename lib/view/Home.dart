@@ -44,6 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Gap(10),
                         Card(
+                          elevation: 4,
+                          //semanticContainer: false,
+                          color: Colorthem.thirtColor,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -68,14 +71,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                               ),
-                              Gap(10),
+                              Gap(20),
                               dataCalenderWidget(),
                               Gap(10),
                             ],
                           ),
                         ),
-                        Gap(10),
+                        // Gap(10),
                         ListView.builder(
+                            reverse: true,
                             shrinkWrap: true,
                             physics: AlwaysScrollableScrollPhysics(),
                             itemCount: 5,
