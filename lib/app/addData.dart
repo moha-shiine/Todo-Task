@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:taskapp/color/them.dart';
+import 'package:taskapp/widget/TextField.dart';
 import 'package:taskapp/widget/dataCalender.dart';
 
 class DateTimePickerWithStartEndTime extends StatefulWidget {
@@ -133,26 +134,11 @@ class _DateTimePickerWithStartEndTimeState
                     SizedBox(height: 16),
 
                     // Start Time Picker Field
-                    TextField(
-                      controller: _startTimeController,
-                      readOnly: true,
-                      decoration: InputDecoration(
-                        hintText: "Pick Start Time",
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(12)),
-                        enabled: true,
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(12)),
-                        fillColor: Colors.grey.shade400,
-                        filled: true,
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(12)),
-                        suffixIcon: Icon(Icons.access_time),
-                      ),
+                    TextFeildWidget(
+                      hinText: 'Pick Start Time',
                       onTap: () => _pickTime(context, _startTimeController),
+                      controller: _startTimeController,
+                      preficicon: Icons.access_time,
                     ),
                     SizedBox(height: 16),
 
