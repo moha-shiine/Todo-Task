@@ -7,6 +7,8 @@ import 'package:taskapp/view/Home.dart';
 import 'package:taskapp/widget/TextField.dart';
 import 'package:taskapp/widget/dataCalender.dart';
 
+import '../widget/swichBoron.dart';
+
 class DateTimePickerWithStartEndTime extends StatefulWidget {
   @override
   _DateTimePickerWithStartEndTimeState createState() =>
@@ -56,6 +58,7 @@ class _DateTimePickerWithStartEndTimeState
   }
 
   final DateTime currentDate = DateTime.now();
+  bool isSwitched = false;
 
   @override
   Widget build(BuildContext context) {
@@ -171,11 +174,41 @@ class _DateTimePickerWithStartEndTimeState
                       preficicon: IconlyLight.timeSquare,
                     ),
 
-                    SizedBox(height: 40),
+                    SizedBox(height: 20),
+
+                    Gap(20),
+                    //row RemainderSwitch(),
+                    Row(
+                      children: [
+                        Text(
+                          "Remander Time",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w700),
+                        ),
+                        Spacer(),
+                        Text(
+                          isSwitched ? "ON" : "OFF",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(width: 10),
+                        Switch(
+                          value: isSwitched,
+                          onChanged: (value) {
+                            setState(() {
+                              isSwitched = value;
+                            });
+                          },
+                          activeColor: Colors.green,
+                          inactiveThumbColor: Colors.grey,
+                        ),
+                      ],
+                    ),
+                    Gap(20),
 
                     // Submit Button
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Container(
                         width: double.infinity,
                         height: 65,
@@ -186,7 +219,7 @@ class _DateTimePickerWithStartEndTimeState
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colorthem.SecondryColor,
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12))),
+                                  borderRadius: BorderRadius.circular(20))),
                           onPressed: () {
                             final title = _titleController.text;
                             final description = _descriptionController.text;
