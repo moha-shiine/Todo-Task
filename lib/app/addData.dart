@@ -83,53 +83,16 @@ class _DateTimePickerWithStartEndTimeState
                           fontWeight: FontWeight.w700),
                     ),
                     Gap(50),
-                    TextField(
+                    TextFeildWidget(
+                      hinText: 'Title',
                       controller: _titleController,
-                      decoration: InputDecoration(
-                        hintText: "Title",
-
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(12)),
-                        enabled: true,
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(12)),
-                        fillColor: Colors.grey.shade400,
-                        filled: true,
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(12)),
-                        //  suffixIcon: Icon(Icons.access_time),
-                      ),
                     ),
-                    SizedBox(height: 16),
 
-                    // Description Field
-                    TextField(
-                      minLines: 3,
-                      // maxLength: 2,
+                    SizedBox(height: 16),
+                    TextFeildWidget(
+                      hinText: 'Description',
                       controller: _descriptionController,
-                      decoration: InputDecoration(
-                        hintText: "Description",
-
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(12)),
-                        enabled: true,
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(12)),
-                        fillColor: Colors.grey.shade400,
-                        filled: true,
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(12)),
-                        // suffixIcon: Icon(Icons.access_time),
-                      ),
-                      maxLines: 3,
                     ),
-                    SizedBox(height: 16),
 
                     SizedBox(height: 16),
 

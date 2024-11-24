@@ -5,11 +5,11 @@ class TextFeildWidget extends StatelessWidget {
       {super.key,
       required this.hinText,
       this.preficicon,
-      required this.onTap,
+      this.onTap,
       required this.controller});
   final String hinText;
   final IconData? preficicon;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final TextEditingController controller;
 
   @override
