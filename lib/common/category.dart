@@ -101,9 +101,9 @@ class _categoryState extends State<category> {
                         Container(
                           margin:
                               EdgeInsetsDirectional.symmetric(horizontal: 10),
-                          height: 30,
+                          height: 20,
                           alignment: Alignment.center,
-                          width: 30,
+                          width: 20,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
                             border: Border.all(
@@ -117,10 +117,10 @@ class _categoryState extends State<category> {
                               },
                               child: Icon(
                                 IconlyLight.arrowLeft,
-                                size: 18,
+                                size: 12,
                               )),
                         ),
-                        Gap(10),
+                        Gap(4),
                         Text(
                           'All Tasks',
                           style: const TextStyle(
