@@ -5,22 +5,25 @@ import 'package:taskapp/color/them.dart';
 
 Widget dataCalenderWidget(
     {void Function(DateTime)? onDateChange, DateTime? initialDate}) {
+  final DateTime currentDate = DateTime.now();
+
   return EasyDateTimeLine(
     onDateChange: onDateChange,
     timeLineProps: const EasyTimeLineProps(),
     headerProps: const EasyHeaderProps(
+      showHeader: false,
       padding: EdgeInsets.only(
         top: 0,
         left: 20,
         bottom: 0,
         right: 0,
       ),
-      showMonthPicker: true,
-      selectedDateStyle: TextStyle(
-          color: Colors.red, fontSize: 16, fontWeight: FontWeight.w600),
+      showMonthPicker: false,
+      //   selectedDateStyle: TextStyle(
+      //       color: Colors.red, fontSize: 16, fontWeight: FontWeight.w600),
     ),
     dayProps: const EasyDayProps(
-        height: 65.0,
+        height: 60.0,
         width: 60.0,
         activeDayStyle: DayStyle(
           borderRadius: 10.0,

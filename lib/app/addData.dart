@@ -55,6 +55,8 @@ class _DateTimePickerWithStartEndTimeState
     }
   }
 
+  final DateTime currentDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,7 +103,21 @@ class _DateTimePickerWithStartEndTimeState
                                 size: 18,
                               )),
                         ),
-                        Gap(20),
+                        Text(
+                          DateFormat(' MMMM d, yyyy').format(currentDate),
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          DateFormat('EEEE').format(currentDate),
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        //Gap(20),
                         dataCalenderWidget(),
                       ],
                     ),
