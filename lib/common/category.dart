@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 import 'package:taskapp/color/them.dart';
 
+import '../view/Home.dart';
 import '../view/model/category_model.dart';
 
 class category extends StatefulWidget {
@@ -87,29 +89,146 @@ class _categoryState extends State<category> {
             child: Container(
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 0.8,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'Selected Index: $index',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                physics: AlwaysScrollableScrollPhysics(),
+                primary: true,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          margin:
+                              EdgeInsetsDirectional.symmetric(horizontal: 10),
+                          height: 30,
+                          alignment: Alignment.center,
+                          width: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            border: Border.all(
+                              color: Colorthem.SecondryColor.withOpacity(0.5),
+                              width: 2,
+                            ),
+                          ),
+                          child: InkWell(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Icon(
+                                IconlyLight.arrowLeft,
+                                size: 18,
+                              )),
+                        ),
+                        Gap(10),
+                        Text(
+                          'All Tasks',
+                          style: const TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    'You tapped on the item with index: $index',
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context); // Close the BottomSheet
-                    },
-                    child: const Text('Close'),
-                  ),
-                ],
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context); // Close the BottomSheet
+                      },
+                      child: const Text('Close'),
+                    ),
+                    ListView.builder(
+                        reverse: true,
+                        shrinkWrap: true,
+                        physics: AlwaysScrollableScrollPhysics(),
+                        itemCount: 6,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: EdgeInsets.symmetric(vertical: 8),
+                            // padding: EdgeInsets.symmetric(vertical: 6),
+                            height: 145,
+                            // height: MediaQuery.of(context).size.height * 0.2,
+                            width: double.infinity,
+
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(26),
+                              border: Border.all(
+                                  color: Colorthem.SecondryColor, width: 1),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Gap(10),
+                                ListTile(
+                                  title: Text(
+                                    "Task Appliction",
+                                    style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  minTileHeight: 10,
+                                  isThreeLine: true,
+                                  trailing: Text(
+                                    "2024/11/02",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  subtitle: Text(
+                                    "waxaan samay nayaa app task anigoo isticmalaya flutter and dart",
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                                Gap(10),
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 17),
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        height: 30,
+                                        width: 110,
+                                        decoration: BoxDecoration(
+                                            color: Colorthem.SecondryColor,
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: Center(
+                                            child: Text(
+                                          "Compelet",
+                                          style: TextStyle(
+                                              color: Colorthem.thirtColor,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.normal),
+                                        )),
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    Icon(
+                                      IconlyLight.editSquare,
+                                      color: Colorthem.PrimaryColor,
+                                    ),
+                                    Gap(10),
+                                    Icon(
+                                      IconlyLight.delete,
+                                      color: Colorthem.SecondryColor,
+                                    ),
+                                    Gap(10)
+                                  ],
+                                )
+                              ],
+                              //       ),
+                              //     );
+                              //   ],
+                              // ),
+                            ),
+                            // height: 222,
+                          );
+                        })
+                  ],
+                ),
               ),
             ),
           );
