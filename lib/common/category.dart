@@ -53,22 +53,22 @@ class _categoryState extends State<category> {
                 HeadWidget(
                   icon: IconlyLight.filter,
                   title: "All Task",
-                  index: 1,
+                  index: 0,
                   onTap: handleItemTap,
-                  isSelected: selelctindex == 1,
+                  isSelected: selelctindex == 0,
                 ),
+                HeadWidget(
+                    icon: IconlyLight.filter,
+                    title: "Cmpelete",
+                    index: 1,
+                    onTap: handleItemTap,
+                    isSelected: selelctindex == 1),
                 HeadWidget(
                     icon: IconlyLight.filter,
                     title: "Cmpelete",
                     index: 2,
                     onTap: handleItemTap,
                     isSelected: selelctindex == 2),
-                HeadWidget(
-                    icon: IconlyLight.filter,
-                    title: "Cmpelete",
-                    index: 3,
-                    onTap: handleItemTap,
-                    isSelected: selelctindex == 3),
               ],
             ),
           ),
@@ -76,44 +76,46 @@ class _categoryState extends State<category> {
   }
 
   void _showBottomSheet(int index) {
-    showModalBottomSheet(
-      isScrollControlled: true,
-      isDismissible: true,
-      context: context,
-      builder: (BuildContext context) {
-        return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Container(
-            width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.8,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Selected Index: $index',
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+    if (index == 0) {
+      showModalBottomSheet(
+        isScrollControlled: true,
+        isDismissible: true,
+        context: context,
+        builder: (BuildContext context) {
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height * 0.8,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Selected Index: $index',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'You tapped on the item with index: $index',
-                  style: const TextStyle(fontSize: 16),
-                ),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context); // Close the BottomSheet
-                  },
-                  child: const Text('Close'),
-                ),
-              ],
+                  const SizedBox(height: 16),
+                  Text(
+                    'You tapped on the item with index: $index',
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context); // Close the BottomSheet
+                    },
+                    child: const Text('Close'),
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
-      },
-    );
+          );
+        },
+      );
+    }
   }
 }
 
@@ -148,8 +150,9 @@ class HeadWidget extends StatelessWidget {
               width: 65,
               decoration: BoxDecoration(
                 color: isSelected
-                    ? Colors.red
-                    : Colors.white, // Red for selected, white for unselected
+                    ? Colorthem.thirtColor
+                    : Colorthem
+                        .PrimaryColor, // Red for selected, white for unselected
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(color: Colors.black),
               ),
@@ -157,9 +160,9 @@ class HeadWidget extends StatelessWidget {
                 icon,
                 size: 30,
                 color: isSelected
-                    ? Colors.white
-                    : Colors
-                        .black, // White icon for selected, black for unselected
+                    ? Colorthem.PrimaryColor
+                    : Colorthem
+                        .thirtColor, // White icon for selected, black for unselected
               ),
             ),
             const SizedBox(height: 8),
