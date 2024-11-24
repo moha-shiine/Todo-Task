@@ -131,12 +131,6 @@ class _categoryState extends State<category> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context); // Close the BottomSheet
-                      },
-                      child: const Text('Close'),
-                    ),
                     ListView.builder(
                         reverse: true,
                         shrinkWrap: true,
