@@ -103,21 +103,24 @@ class _DateTimePickerWithStartEndTimeState
                                 size: 18,
                               )),
                         ),
+                        Gap(20),
                         Text(
                           DateFormat(' MMMM d, yyyy').format(currentDate),
                           style: const TextStyle(
-                            fontSize: 16,
+                            fontSize: 20,
+                            color: Colorthem.SecondryColor,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
                           DateFormat('EEEE').format(currentDate),
                           style: const TextStyle(
-                            fontSize: 16,
+                            color: Colorthem.PrimaryColor,
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        //Gap(20),
+                        Gap(10),
                         dataCalenderWidget(),
                       ],
                     ),
