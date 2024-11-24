@@ -96,7 +96,10 @@ class _DateTimePickerWithStartEndTimeState
                                     MaterialPageRoute(
                                         builder: (_) => HomeScreen()));
                               },
-                              child: Icon(IconlyLight.arrowLeft)),
+                              child: Icon(
+                                IconlyLight.arrowLeft,
+                                size: 18,
+                              )),
                         ),
                         Gap(20),
                         dataCalenderWidget(),
@@ -153,13 +156,13 @@ class _DateTimePickerWithStartEndTimeState
 
                     // Submit Button
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Container(
                         width: double.infinity,
-                        height: 60,
+                        height: 65,
                         decoration: BoxDecoration(
                             color: Colorthem.SecondryColor,
-                            borderRadius: BorderRadius.circular(10)),
+                            borderRadius: BorderRadius.circular(20)),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colorthem.SecondryColor,
@@ -195,8 +198,11 @@ class _DateTimePickerWithStartEndTimeState
                             }
                           },
                           child: Text(
-                            "Submit",
-                            style: TextStyle(color: Colorthem.thirtColor),
+                            "Create",
+                            style: TextStyle(
+                                color: Colorthem.thirtColor,
+                                fontSize: 26,
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
                       ),
