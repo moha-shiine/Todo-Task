@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskapp/color/them.dart';
 
 class TextFeildWidget extends StatelessWidget {
   const TextFeildWidget(
@@ -32,12 +33,15 @@ class TextFeildWidget extends StatelessWidget {
             enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide.none,
                 borderRadius: BorderRadius.circular(12)),
-            fillColor: Colors.grey.shade400,
+            fillColor: Colors.grey.shade300,
             filled: true,
             focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide.none,
                 borderRadius: BorderRadius.circular(12)),
-            suffixIcon: Icon(preficicon)),
+            suffixIcon: Icon(
+              preficicon,
+              color: Colorthem.SecondryColor,
+            )),
         onTap: onTap);
   }
 }
