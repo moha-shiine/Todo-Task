@@ -56,14 +56,17 @@ class _DateTimePickerWithStartEndTimeState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      extendBody: true,
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
         child: Column(
           children: [
             Gap(50),
             Expanded(
                 flex: 1,
                 child: Container(
+                  color: Colorthem.thirtColor,
                   // height: ,
                   child: dataCalenderWidget(),
                 )),
@@ -71,7 +74,7 @@ class _DateTimePickerWithStartEndTimeState
               flex: 3,
               child: Container(
                 padding: EdgeInsetsDirectional.symmetric(horizontal: 20),
-                color: Colors.grey.withOpacity(0.2),
+                color: Colors.grey.withOpacity(0.1),
                 child: Column(
                   children: [
                     Gap(20),
