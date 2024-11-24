@@ -2,6 +2,7 @@ import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 import 'package:taskapp/app/addData.dart';
 import 'package:taskapp/color/them.dart';
 import 'package:taskapp/common/headerwidget.dart';
@@ -16,6 +17,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final DateTime currentDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +40,40 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        dataCalenderWidget(),
+                        Gap(10),
+                        Card(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Gap(10),
+                              Text(
+                                DateFormat(' MMMM d').format(currentDate),
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colorthem.SecondryColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                child: Text(
+                                  DateFormat('yyyy').format(currentDate),
+                                  style: const TextStyle(
+                                    color: Colorthem.PrimaryColor,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Gap(10),
+                              dataCalenderWidget(),
+                              Gap(10),
+                            ],
+                          ),
+                        ),
                         Gap(10),
                         ListView.builder(
                             shrinkWrap: true,
