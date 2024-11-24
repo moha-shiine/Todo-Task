@@ -3,6 +3,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:taskapp/color/them.dart';
+import 'package:taskapp/view/Home.dart';
 import 'package:taskapp/widget/TextField.dart';
 import 'package:taskapp/widget/dataCalender.dart';
 
@@ -69,11 +70,38 @@ class _DateTimePickerWithStartEndTimeState
                 child: Container(
                   color: Colorthem.thirtColor,
                   // height: ,
-                  child: Column(
-                    children: [
-                      Icon(IconlyLight.arrowLeft2),
-                      dataCalenderWidget(),
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Gap(10),
+                        Container(
+                          margin:
+                              EdgeInsetsDirectional.symmetric(horizontal: 10),
+                          height: 30,
+                          alignment: Alignment.center,
+                          width: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            border: Border.all(
+                              color: Colorthem.SecondryColor.withOpacity(0.5),
+                              width: 2,
+                            ),
+                          ),
+                          child: InkWell(
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => HomeScreen()));
+                              },
+                              child: Icon(IconlyLight.arrowLeft)),
+                        ),
+                        Gap(20),
+                        dataCalenderWidget(),
+                      ],
+                    ),
                   ),
                 )),
             Expanded(
