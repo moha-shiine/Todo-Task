@@ -141,30 +141,13 @@ class _DateTimePickerWithStartEndTimeState
                       preficicon: Icons.access_time,
                     ),
                     SizedBox(height: 16),
-
-                    // End Time Picker Field
-                    TextField(
-                      maxLines: 1,
-                      controller: _endTimeController,
-                      readOnly: true,
-                      decoration: InputDecoration(
-                        hintText: "Pick End Time",
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(12)),
-                        enabled: true,
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(12)),
-                        fillColor: Colors.grey.shade400,
-                        filled: true,
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(12)),
-                        suffixIcon: Icon(Icons.access_time),
-                      ),
+                    TextFeildWidget(
+                      hinText: "Pick End Time",
                       onTap: () => _pickTime(context, _endTimeController),
+                      controller: _endTimeController,
+                      preficicon: Icons.access_time,
                     ),
+
                     SizedBox(height: 40),
 
                     // Submit Button
