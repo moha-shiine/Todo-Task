@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-
 import 'package:intl/intl.dart';
 import 'package:taskapp/color/them.dart';
 import 'package:taskapp/controller/taskcontroller.dart';
@@ -26,7 +25,6 @@ class _DateTimePickerWithStartEndTimeState
   final TextEditingController _startTimeController = TextEditingController();
   final TextEditingController _endTimeController = TextEditingController();
 
-  // Function for DateTime Picker
   Future<void> _pickDateTime(BuildContext context) async {
     DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -36,7 +34,6 @@ class _DateTimePickerWithStartEndTimeState
     );
   }
 
-  // Function for Time Picker
   Future<void> _pickTime(
       BuildContext context, TextEditingController timeController) async {
     TimeOfDay? pickedTime = await showTimePicker(
@@ -68,127 +65,95 @@ class _DateTimePickerWithStartEndTimeState
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-        child: Column(
-          children: [
-            Gap(50),
-            Expanded(
-                flex: 1,
-                child: Container(
-                  color: Colorthem.thirtColor,
-                  // height: ,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Gap(10),
-                        Container(
-                          margin:
-                              EdgeInsetsDirectional.symmetric(horizontal: 10),
-                          height: 30,
-                          alignment: Alignment.center,
-                          width: 30,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            border: Border.all(
-                              color: Colorthem.SecondryColor.withOpacity(0.5),
-                              width: 2,
-                            ),
-                          ),
-                          child: InkWell(
-                              onTap: () {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => HomeScreen()));
-                              },
-                              child: Icon(
-                                IconlyLight.arrowLeft,
-                                size: 18,
-                              )),
-                        ),
-                        Gap(20),
-                        Text(
-                          DateFormat(' MMMM d, yyyy').format(currentDate),
-                          style: const TextStyle(
-                            fontSize: 20,
-                            color: Colorthem.SecondryColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          DateFormat('EEEE').format(currentDate),
-                          style: const TextStyle(
-                            color: Colorthem.PrimaryColor,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Gap(10),
-                        dataCalenderWidget(),
-                      ],
-                    ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Gap(50),
+              Container(
+                margin: EdgeInsetsDirectional.symmetric(horizontal: 10),
+                height: 30,
+                alignment: Alignment.center,
+                width: 30,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  border: Border.all(
+                    color: Colorthem.SecondryColor.withOpacity(0.5),
+                    width: 2,
                   ),
-                )),
-            Expanded(
-              flex: 3,
-              child: Container(
-                padding: EdgeInsetsDirectional.symmetric(horizontal: 20),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (_) => HomeScreen()));
+                  },
+                  child: Icon(
+                    IconlyLight.arrowLeft,
+                    size: 18,
+                  ),
+                ),
+              ),
+              Gap(20),
+              Text(
+                DateFormat(' MMMM d, yyyy').format(currentDate),
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: Colorthem.SecondryColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                DateFormat('EEEE').format(currentDate),
+                style: const TextStyle(
+                  color: Colorthem.PrimaryColor,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              dataCalenderWidget(),
+              Gap(20),
+              Container(
                 color: Colors.grey.withOpacity(0.1),
+                padding: EdgeInsets.all(20),
                 child: Column(
                   children: [
-                    Gap(20),
                     Text(
                       "Create New Task",
                       style: TextStyle(
-                          color: Colorthem.SecondryColor,
-                          fontSize: 30,
-                          fontWeight: FontWeight.w700),
+                        color: Colorthem.SecondryColor,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
-                    Gap(50),
+                    Gap(20),
                     TextField(
                       controller: _titleController,
-                      decoration: InputDecoration(hintText: "titel"),
+                      decoration: InputDecoration(hintText: "Title"),
                     ),
-
-                    SizedBox(height: 16),
+                    Gap(16),
                     TextField(
                       controller: _descriptionController,
-                      decoration: InputDecoration(hintText: "Subtitel"),
+                      decoration: InputDecoration(hintText: "Subtitle"),
                     ),
+                    Gap(16),
                     TextField(
                       controller: categoryController,
-                      decoration: InputDecoration(hintText: "Subtitel"),
+                      decoration: InputDecoration(hintText: "Category"),
                     ),
-
-                    SizedBox(height: 16),
-
-                    // Start Time Picker Field
+                    Gap(16),
                     TextFeildWidget(
                       hinText: 'Pick Start Time',
                       onTap: () => _pickTime(context, _startTimeController),
                       controller: _startTimeController,
                       preficicon: IconlyLight.timeSquare,
                     ),
-
-                    SizedBox(height: 16),
-                    // TextFeildWidget(
-                    //   hinText: "Pick End Time",
-                    //   onTap: () => _pickTime(context, _endTimeController),
-                    //   controller: _endTimeController,
-                    //   preficicon: IconlyLight.timeSquare,
-                    // ),
-
-                    SizedBox(height: 20),
-
                     Gap(20),
-
                     Row(
                       children: [
                         Text(
-                          "Remander Time",
+                          "Reminder Time",
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w700),
                         ),
@@ -212,62 +177,53 @@ class _DateTimePickerWithStartEndTimeState
                       ],
                     ),
                     Gap(20),
-
-                    // Submit Button
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Container(
-                        width: double.infinity,
-                        height: 65,
-                        decoration: BoxDecoration(
-                            color: Colorthem.SecondryColor,
-                            borderRadius: BorderRadius.circular(20)),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colorthem.SecondryColor,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20))),
-                          onPressed: () {
-                            if (_titleController.text.isNotEmpty) {
-                              tasksController.insertTask({
-                                'title': _titleController.text,
-                                'category': categoryController.text,
-                                'subtitle': _descriptionController.text,
-                                'timeTask': DateTime.now().toIso8601String(),
-                                //_dateTimeController,
-                              });
-                              Get.back(); // Close the screen
-                            } else {
-                              Get.snackbar(
-                                'Error',
-                                'Title is required',
-                                snackPosition: SnackPosition.BOTTOM,
-                              );
-                            }
-                            Get.back();
+                    Container(
+                      width: double.infinity,
+                      height: 65,
+                      decoration: BoxDecoration(
+                          color: Colorthem.SecondryColor,
+                          borderRadius: BorderRadius.circular(20)),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colorthem.SecondryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                        onPressed: () {
+                          if (_titleController.text.isNotEmpty) {
+                            tasksController.insertTask({
+                              'title': _titleController.text,
+                              'category': categoryController.text,
+                              'subtitle': _descriptionController.text,
+                              'timeTask': _dateTimeController.text,
+                            });
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => HomeScreen()));
-                          },
-                          child: Text(
-                            "Create",
-                            style: TextStyle(
-                                color: Colorthem.thirtColor,
-                                fontSize: 26,
-                                fontWeight: FontWeight.w600),
-                          ),
+                          } else {
+                            Get.snackbar(
+                              'Error',
+                              'Title is required',
+                              snackPosition: SnackPosition.BOTTOM,
+                            );
+                          }
+                        },
+                        child: Text(
+                          "Create",
+                          style: TextStyle(
+                              color: Colorthem.thirtColor,
+                              fontSize: 26,
+                              fontWeight: FontWeight.w600),
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
-
-            Gap(20),
-            // Title Field
-          ],
+            ],
+          ),
         ),
       ),
     );
