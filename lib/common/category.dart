@@ -26,7 +26,7 @@ class _categoryState extends State<category> {
   void toggleSelection(int index) {
     setState(() {
       for (int i = 0; i < taskList.length; i++) {
-        taskList[i].isSelected = i == index; // Only select the clicked item
+        taskList[i].isSelected = i == index;
       }
     });
   }
@@ -35,6 +35,7 @@ class _categoryState extends State<category> {
   void handleItemTap(int index) {
     setState(() {
       selelctindex = index;
+      _showBottomSheet(index);
       _showBottomSheet(index);
     });
   }
@@ -60,14 +61,14 @@ class _categoryState extends State<category> {
                   isSelected: selelctindex == 0,
                 ),
                 HeadWidget(
-                    icon: IconlyLight.filter,
+                    icon: IconlyLight.plus,
                     title: "Cmpelete",
                     index: 1,
                     onTap: handleItemTap,
                     isSelected: selelctindex == 1),
                 HeadWidget(
-                    icon: IconlyLight.filter,
-                    title: "Cmpelete",
+                    icon: Icons.done,
+                    title: "Work",
                     index: 2,
                     onTap: handleItemTap,
                     isSelected: selelctindex == 2),
