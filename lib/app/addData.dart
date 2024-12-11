@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
+
 import 'package:intl/intl.dart';
 import 'package:taskapp/color/them.dart';
+import 'package:taskapp/controller/taskcontroller.dart';
 import 'package:taskapp/view/Home.dart';
 import 'package:taskapp/widget/TextField.dart';
 import 'package:taskapp/widget/dataCalender.dart';
-
 
 class DateTimePickerWithStartEndTime extends StatefulWidget {
   @override
@@ -16,6 +18,8 @@ class DateTimePickerWithStartEndTime extends StatefulWidget {
 
 class _DateTimePickerWithStartEndTimeState
     extends State<DateTimePickerWithStartEndTime> {
+  final TasksController tasksController = Get.find();
+  TextEditingController categoryController = TextEditingController();
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _dateTimeController = TextEditingController();
@@ -144,16 +148,19 @@ class _DateTimePickerWithStartEndTimeState
                           fontWeight: FontWeight.w700),
                     ),
                     Gap(50),
-                    TextFeildWidget(
-                      hinText: 'Title',
+                    TextField(
                       controller: _titleController,
+                      decoration: InputDecoration(hintText: "titel"),
                     ),
 
                     SizedBox(height: 16),
-                    TextFeildWidget(
-                      maxLine: 3,
-                      hinText: 'Description',
+                    TextField(
                       controller: _descriptionController,
+                      decoration: InputDecoration(hintText: "Subtitel"),
+                    ),
+                    TextField(
+                      controller: categoryController,
+                      decoration: InputDecoration(hintText: "Subtitel"),
                     ),
 
                     SizedBox(height: 16),
@@ -165,18 +172,19 @@ class _DateTimePickerWithStartEndTimeState
                       controller: _startTimeController,
                       preficicon: IconlyLight.timeSquare,
                     ),
+
                     SizedBox(height: 16),
-                    TextFeildWidget(
-                      hinText: "Pick End Time",
-                      onTap: () => _pickTime(context, _endTimeController),
-                      controller: _endTimeController,
-                      preficicon: IconlyLight.timeSquare,
-                    ),
+                    // TextFeildWidget(
+                    //   hinText: "Pick End Time",
+                    //   onTap: () => _pickTime(context, _endTimeController),
+                    //   controller: _endTimeController,
+                    //   preficicon: IconlyLight.timeSquare,
+                    // ),
 
                     SizedBox(height: 20),
 
                     Gap(20),
-                    //row RemainderSwitch(),
+
                     Row(
                       children: [
                         Text(
@@ -220,33 +228,27 @@ class _DateTimePickerWithStartEndTimeState
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20))),
                           onPressed: () {
-                            final title = _titleController.text;
-                            final description = _descriptionController.text;
-                            final dateTime = _dateTimeController.text;
-                            final startTime = _startTimeController.text;
-                            final endTime = _endTimeController.text;
-
-                            if (title.isEmpty ||
-                                description.isEmpty ||
-                                dateTime.isEmpty ||
-                                startTime.isEmpty ||
-                                endTime.isEmpty) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text("Please fill out all fields!"),
-                                  backgroundColor: Colors.red,
-                                ),
-                              );
+                            if (_titleController.text.isNotEmpty) {
+                              tasksController.insertTask({
+                                'title': _titleController.text,
+                                'category': categoryController.text,
+                                'subtitle': _descriptionController.text,
+                                'timeTask': DateTime.now().toIso8601String(),
+                                //_dateTimeController,
+                              });
+                              Get.back(); // Close the screen
                             } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    "Submitted:\nTitle: $title\nDescription: $description\nDate & Time: $dateTime\nStart Time: $startTime\nEnd Time: $endTime",
-                                  ),
-                                  backgroundColor: Colors.green,
-                                ),
+                              Get.snackbar(
+                                'Error',
+                                'Title is required',
+                                snackPosition: SnackPosition.BOTTOM,
                               );
                             }
+                            Get.back();
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomeScreen()));
                           },
                           child: Text(
                             "Create",
@@ -277,7 +279,7 @@ class _DateTimePickerWithStartEndTimeState
     _descriptionController.dispose();
     _dateTimeController.dispose();
     _startTimeController.dispose();
-    _endTimeController.dispose();
+    categoryController.dispose();
     super.dispose();
   }
 }

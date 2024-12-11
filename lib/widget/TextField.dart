@@ -19,7 +19,8 @@ class TextFeildWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+        keyboardType: TextInputType.text,
         maxLines: maxLine,
         maxLength: maxLength,
         controller: controller,
