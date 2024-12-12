@@ -8,7 +8,7 @@ class TasksController extends GetxController {
   Future<sql.Database> _db() async {
     return sql.openDatabase(
       'tasks.db',
-      version: 3,
+      version: 4, // Incremented version to ensure schema update
       onCreate: (db, version) {
         return db.execute(
           """
@@ -17,24 +17,18 @@ class TasksController extends GetxController {
             title TEXT,
             category TEXT, 
             subtitle TEXT, 
+            start_time TEXT,  // Fixed column name
+            end_time TEXT,    // Fixed column name
             timeTask TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
           )
           """,
         );
       },
       onUpgrade: (db, oldVersion, newVersion) async {
-        if (oldVersion < 3) {
-          // Drop the old table if necessary and recreate it
-          await db.execute("DROP TABLE IF EXISTS tasks");
-          await db.execute("""
-            CREATE TABLE tasks(
-              id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
-              title TEXT,
-              category TEXT, 
-              subtitle TEXT, 
-              timeTask TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-            )
-          """);
+        if (oldVersion < 4) {
+          // Add start_time and end_time columns if upgrading from an older version
+          await db.execute("ALTER TABLE tasks ADD COLUMN start_time TEXT");
+          await db.execute("ALTER TABLE tasks ADD COLUMN end_time TEXT");
         }
       },
     );
@@ -50,7 +44,7 @@ class TasksController extends GetxController {
       );
 
       await getTasks();
-      print(getTasks);
+      print(tasks);
     } catch (e) {
       print("Error inserting task: $e");
     }
@@ -85,6 +79,8 @@ class TasksController extends GetxController {
   Future<void> updateTask(Taskmodel task) async {
     try {
       final db = await _db();
+
+      // Ensure correct column names are used
       await db.update(
         'tasks',
         task.toJson(),

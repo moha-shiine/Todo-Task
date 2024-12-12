@@ -18,24 +18,21 @@ class DateTimePickerWithStartEndTime extends StatefulWidget {
 class _DateTimePickerWithStartEndTimeState
     extends State<DateTimePickerWithStartEndTime> {
   final TasksController tasksController = Get.find();
-  TextEditingController categoryController = TextEditingController();
+  final TextEditingController categoryController = TextEditingController();
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-  final TextEditingController _dateTimeController = TextEditingController();
   final TextEditingController _startTimeController = TextEditingController();
   final TextEditingController _endTimeController = TextEditingController();
 
-  Future<void> _pickDateTime(BuildContext context) async {
-    DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2100),
-    );
-  }
+  TimeOfDay? _startTime;
+  TimeOfDay? _endTime;
+  bool isSwitched = false;
 
   Future<void> _pickTime(
-      BuildContext context, TextEditingController timeController) async {
+    BuildContext context,
+    TextEditingController timeController, {
+    required bool isStartTime,
+  }) async {
     TimeOfDay? pickedTime = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
@@ -53,12 +50,56 @@ class _DateTimePickerWithStartEndTimeState
 
       setState(() {
         timeController.text = DateFormat('hh:mm a').format(fullTime);
+
+        if (isStartTime) {
+          _startTime = pickedTime;
+        } else {
+          _endTime = pickedTime;
+        }
       });
     }
   }
 
-  final DateTime currentDate = DateTime.now();
-  bool isSwitched = false;
+  bool _isTimeValid() {
+    if (_startTime == null || _endTime == null) return true;
+    return _startTime!.hour < _endTime!.hour ||
+        (_startTime!.hour == _endTime!.hour &&
+            _startTime!.minute < _endTime!.minute);
+  }
+
+  void _validateAndCreateTask() {
+    if (_titleController.text.isEmpty) {
+      Get.snackbar(
+        'Error',
+        'Title is required',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
+    if (!_isTimeValid()) {
+      Get.snackbar(
+        'Error',
+        'Start time must be earlier than end time',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
+
+    final String currentDateFormatted =
+        DateFormat('yyyy-MM-dd').format(DateTime.now());
+
+    tasksController.insertTask({
+      'title': _titleController.text,
+      'category': categoryController.text,
+      'subtitle': _descriptionController.text,
+      'start_time': _startTimeController.text,
+      'end_time': _endTimeController.text,
+      'timeTask': currentDateFormatted,
+    });
+
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => HomeScreen()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +112,9 @@ class _DateTimePickerWithStartEndTimeState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Gap(50),
+              const Gap(50),
               Container(
-                margin: EdgeInsetsDirectional.symmetric(horizontal: 10),
+                margin: const EdgeInsetsDirectional.symmetric(horizontal: 10),
                 height: 30,
                 alignment: Alignment.center,
                 width: 30,
@@ -89,15 +130,15 @@ class _DateTimePickerWithStartEndTimeState
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (_) => HomeScreen()));
                   },
-                  child: Icon(
+                  child: const Icon(
                     IconlyLight.arrowLeft,
                     size: 18,
                   ),
                 ),
               ),
-              Gap(20),
+              const Gap(20),
               Text(
-                DateFormat(' MMMM d, yyyy').format(currentDate),
+                DateFormat('MMMM d, yyyy').format(DateTime.now()),
                 style: const TextStyle(
                   fontSize: 20,
                   color: Colorthem.SecondryColor,
@@ -105,7 +146,7 @@ class _DateTimePickerWithStartEndTimeState
                 ),
               ),
               Text(
-                DateFormat('EEEE').format(currentDate),
+                DateFormat('EEEE').format(DateTime.now()),
                 style: const TextStyle(
                   color: Colorthem.PrimaryColor,
                   fontSize: 22,
@@ -113,13 +154,13 @@ class _DateTimePickerWithStartEndTimeState
                 ),
               ),
               dataCalenderWidget(),
-              Gap(20),
+              const Gap(20),
               Container(
                 color: Colors.grey.withOpacity(0.1),
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Column(
                   children: [
-                    Text(
+                    const Text(
                       "Create New Task",
                       style: TextStyle(
                         color: Colorthem.SecondryColor,
@@ -127,43 +168,62 @@ class _DateTimePickerWithStartEndTimeState
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    Gap(20),
+                    const Gap(20),
                     TextField(
                       controller: _titleController,
-                      decoration: InputDecoration(hintText: "Title"),
+                      decoration: const InputDecoration(hintText: "Title"),
                     ),
-                    Gap(16),
+                    const Gap(16),
                     TextField(
                       controller: _descriptionController,
-                      decoration: InputDecoration(hintText: "Subtitle"),
+                      decoration: const InputDecoration(hintText: "Subtitle"),
                     ),
-                    Gap(16),
+                    const Gap(16),
                     TextField(
                       controller: categoryController,
-                      decoration: InputDecoration(hintText: "Category"),
+                      decoration: const InputDecoration(hintText: "Category"),
                     ),
-                    Gap(16),
-                    TextFeildWidget(
-                      hinText: 'Pick Start Time',
-                      onTap: () => _pickTime(context, _startTimeController),
+                    const Gap(16),
+                    // TextFeildWidget(
+                    //   hinText: 'Pick Start Time',
+                    //   onTap: () => _pickTime(context, _startTimeController,
+                    //       isStartTime: true),
+                    //   controller: _startTimeController,
+                    //   preficicon: IconlyLight.timeSquare,
+                    // ),
+                    TextField(
+                      onTap: () => _pickTime(context, _startTimeController,
+                          isStartTime: true),
                       controller: _startTimeController,
+                      decoration: const InputDecoration(
+                          suffixIcon: Icon(
+                            IconlyLight.timeSquare,
+                          ),
+                          hintText: "Category"),
+                    ),
+                    const Gap(16),
+                    TextFeildWidget(
+                      hinText: 'Pick End Time',
+                      onTap: () => _pickTime(context, _endTimeController,
+                          isStartTime: false),
+                      controller: _endTimeController,
                       preficicon: IconlyLight.timeSquare,
                     ),
-                    Gap(20),
+                    const Gap(20),
                     Row(
                       children: [
-                        Text(
+                        const Text(
                           "Reminder Time",
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w700),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Text(
                           isSwitched ? "ON" : "OFF",
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Switch(
                           value: isSwitched,
                           onChanged: (value) {
@@ -176,13 +236,14 @@ class _DateTimePickerWithStartEndTimeState
                         ),
                       ],
                     ),
-                    Gap(20),
+                    const Gap(20),
                     Container(
                       width: double.infinity,
                       height: 65,
                       decoration: BoxDecoration(
-                          color: Colorthem.SecondryColor,
-                          borderRadius: BorderRadius.circular(20)),
+                        color: Colorthem.SecondryColor,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colorthem.SecondryColor,
@@ -190,32 +251,14 @@ class _DateTimePickerWithStartEndTimeState
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
-                        onPressed: () {
-                          if (_titleController.text.isNotEmpty) {
-                            tasksController.insertTask({
-                              'title': _titleController.text,
-                              'category': categoryController.text,
-                              'subtitle': _descriptionController.text,
-                              'timeTask': _dateTimeController.text,
-                            });
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomeScreen()));
-                          } else {
-                            Get.snackbar(
-                              'Error',
-                              'Title is required',
-                              snackPosition: SnackPosition.BOTTOM,
-                            );
-                          }
-                        },
-                        child: Text(
+                        onPressed: _validateAndCreateTask,
+                        child: const Text(
                           "Create",
                           style: TextStyle(
-                              color: Colorthem.thirtColor,
-                              fontSize: 26,
-                              fontWeight: FontWeight.w600),
+                            color: Colorthem.thirtColor,
+                            fontSize: 26,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ),
@@ -233,8 +276,8 @@ class _DateTimePickerWithStartEndTimeState
   void dispose() {
     _titleController.dispose();
     _descriptionController.dispose();
-    _dateTimeController.dispose();
     _startTimeController.dispose();
+    _endTimeController.dispose();
     categoryController.dispose();
     super.dispose();
   }
