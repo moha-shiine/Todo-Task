@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get_navigation/src/snackbar/snackbar.dart';
+
 import 'package:taskapp/color/them.dart';
 
-import '../view/Home.dart';
 import '../view/model/category_model.dart';
 
 class category extends StatefulWidget {
@@ -14,6 +13,7 @@ class category extends StatefulWidget {
   _categoryState createState() => _categoryState();
 }
 
+// ignore: camel_case_types
 class _categoryState extends State<category> {
   // Initialize the task list
   List<categoryMoldel> taskList = [

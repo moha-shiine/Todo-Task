@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:taskapp/app/login/singup.dart';
+import 'package:taskapp/widget/bottom/socilaloginbotoom.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -66,10 +65,10 @@ class LoginScreen extends StatelessWidget {
                           child: Column(
                             children: [
                               const SizedBox(height: 20),
-                              CustomInputField(
+                              CustomInputFields(
                                   hint: 'Enter your email',
                                   icon: Icons.email_outlined),
-                              CustomInputField(
+                              CustomInputFields(
                                   hint: 'Enter your password',
                                   icon: Icons.lock_outline),
                               const SizedBox(height: 10),
@@ -125,158 +124,7 @@ class LoginScreen extends StatelessWidget {
                         ),
 
                         // Sign Up Tab
-                        SingleChildScrollView(
-                          // Make the content scrollable
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(height: 20),
-                              CustomInputField(
-                                  hint: 'Your name',
-                                  icon: Icons.person_outline),
-                              CustomInputField(
-                                  hint: 'Enter your email',
-                                  icon: Icons.email_outlined),
-                              CustomInputFields(
-                                hint: 'Enter your password',
-                                icon: Icons.lock_outline,
-                                onChanged: passwordController.updatePassword,
-                              ),
-                              CustomInputFields(
-                                hint: 'Confirm your password',
-                                icon: Icons.lock_outline,
-                                onChanged:
-                                    passwordController.updateConfirmPassword,
-                              ),
-                              //  const SizedBox(height: 10),
-
-                              // Real-time Validation Feedback
-                              Obx(
-                                () => Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Checkbox(
-                                          shape: const CircleBorder(),
-                                          value:
-                                              passwordController.hasMinLength,
-                                          onChanged:
-                                              null, // Disabled as it's for display only
-                                          activeColor: Colors.green,
-                                        ),
-                                        Text(
-                                          'At least 8 characters',
-                                          style: GoogleFonts.poppins(
-                                            fontSize: 12,
-                                            color:
-                                                passwordController.hasMinLength
-                                                    ? Colors.green
-                                                    : Colors.red,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Checkbox(
-                                          shape: const CircleBorder(),
-                                          value: passwordController.hasNumber,
-                                          onChanged: null,
-                                          activeColor: Colors.green,
-                                        ),
-                                        Text(
-                                          'At least 1 number',
-                                          style: GoogleFonts.poppins(
-                                            fontSize: 12,
-                                            color: passwordController.hasNumber
-                                                ? Colors.green
-                                                : Colors.red,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Checkbox(
-                                          shape: const CircleBorder(),
-                                          value: passwordController
-                                              .hasUpperAndLower,
-                                          onChanged: null,
-                                          activeColor: Colors.green,
-                                        ),
-                                        Text(
-                                          'Both upper and lower case letters',
-                                          style: GoogleFonts.poppins(
-                                            fontSize: 12,
-                                            color: passwordController
-                                                    .hasUpperAndLower
-                                                ? Colors.green
-                                                : Colors.red,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Checkbox(
-                                          shape: const CircleBorder(),
-                                          value:
-                                              passwordController.passwordsMatch,
-                                          onChanged: null,
-                                          activeColor: Colors.green,
-                                        ),
-                                        Text(
-                                          'Passwords match',
-                                          style: GoogleFonts.poppins(
-                                            fontSize: 12,
-                                            color: passwordController
-                                                    .passwordsMatch
-                                                ? Colors.green
-                                                : Colors.red,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-                              const SizedBox(height: 20),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.green,
-                                  minimumSize: const Size(double.infinity, 50),
-                                ),
-                                onPressed: () {
-                                  if (passwordController.passwordsMatch &&
-                                      passwordController.hasMinLength &&
-                                      passwordController.hasNumber &&
-                                      passwordController.hasUpperAndLower) {
-                                    // Perform sign-up logic
-                                    Get.snackbar('Success', 'Sign Up Complete!',
-                                        snackPosition: SnackPosition.BOTTOM,
-                                        backgroundColor: Colors.green,
-                                        colorText: Colors.white);
-                                  } else {
-                                    Get.snackbar(
-                                        'Error', 'Check your password!',
-                                        snackPosition: SnackPosition.BOTTOM,
-                                        backgroundColor: Colors.red,
-                                        colorText: Colors.white);
-                                  }
-                                },
-                                child: const Text(
-                                  'Sign Up',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ],
-                            //    ),
-                            //   ],
-                            // ),
-                          ),
-                        ),
+                        SinupWiget(passwordController: passwordController),
                       ]),
                     ),
                   ],
@@ -290,73 +138,44 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class SocialLoginButton extends StatelessWidget {
-  final IconData icon;
-  final String text;
-  final Color color;
+// class CustomInputField extends StatelessWidget {
+//   final String hint;
+//   final IconData icon;
 
-  const SocialLoginButton({
-    super.key,
-    required this.icon,
-    required this.text,
-    required this.color,
-  });
+//   const CustomInputField({
+//     super.key,
+//     required this.hint,
+//     required this.icon,
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: color.withOpacity(0.1),
-        minimumSize: const Size(double.infinity, 50),
-      ),
-      icon: Icon(icon, color: color),
-      onPressed: () {},
-      label: Text(
-        text,
-        style: TextStyle(color: color, fontWeight: FontWeight.w600),
-      ),
-    );
-  }
-}
-
-class CustomInputField extends StatelessWidget {
-  final String hint;
-  final IconData icon;
-
-  const CustomInputField({
-    super.key,
-    required this.hint,
-    required this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      child: TextField(
-        decoration: InputDecoration(
-          hintText: hint,
-          prefixIcon: Icon(icon, color: Colors.black54),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(color: Colors.black26),
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       margin: const EdgeInsets.symmetric(vertical: 10),
+//       child: TextField(
+//         decoration: InputDecoration(
+//           hintText: hint,
+//           prefixIcon: Icon(icon, color: Colors.black54),
+//           border: OutlineInputBorder(
+//             borderRadius: BorderRadius.circular(10),
+//             borderSide: const BorderSide(color: Colors.black26),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class CustomInputFields extends StatelessWidget {
   final String hint;
   final IconData icon;
-  final Function(String) onChanged;
+  final Function(String)? onChanged;
 
   const CustomInputFields({
     super.key,
     required this.hint,
     required this.icon,
-    required this.onChanged,
+    this.onChanged,
   });
 
   @override

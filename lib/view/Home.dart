@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:gap/gap.dart';
@@ -193,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         const Gap(10),
                                         InkWell(
                                           onTap: () => tasksController
-                                              .deleteTask(task.id!),
+                                              .deleteTask(task.id),
                                           child: Icon(
                                             IconlyLight.delete,
                                             color: Colorthem.SecondryColor,

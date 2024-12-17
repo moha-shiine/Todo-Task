@@ -5,6 +5,7 @@ import 'package:taskapp/color/them.dart';
 
 Widget dataCalenderWidget(
     {void Function(DateTime)? onDateChange, DateTime? initialDate}) {
+  // ignore: unused_local_variable
   final DateTime currentDate = DateTime.now();
 
   return EasyDateTimeLine(
