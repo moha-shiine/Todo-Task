@@ -141,13 +141,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                           const Gap(2),
-                                          // Text(
-                                          //   '${task.startTime}, ${task.endTime}',
-                                          //   style: const TextStyle(
-                                          //     fontSize: 12,
-                                          //     fontWeight: FontWeight.w500,
-                                          //   ),
-                                          // ),
+                                          Text(
+                                            '${task.start_time}, ${task.end_time}',
+                                            style: const TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),
