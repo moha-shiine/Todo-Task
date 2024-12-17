@@ -3,7 +3,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:taskapp/app/login/login.dart';
+
+import 'package:taskapp/controller/PasswordValidationController.dart';
 import 'package:taskapp/widget/bottom/CustomInputFields.dart';
 
 class SinupWiget extends StatelessWidget {
