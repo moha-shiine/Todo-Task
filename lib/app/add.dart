@@ -13,7 +13,7 @@ import 'package:taskapp/model/taskmodel.dart';
 class TaskEditPage extends StatefulWidget {
   final Taskmodel? task; // Optional parameter to pass task if updating
 
-  TaskEditPage({Key? key, this.task}) : super(key: key);
+  const TaskEditPage({super.key, this.task});
 
   @override
   _TaskEditPageState createState() => _TaskEditPageState();
@@ -37,9 +37,9 @@ class _TaskEditPageState extends State<TaskEditPage> {
 
     // If updating an existing task, populate the controllers with task data
     if (widget.task != null) {
-      _titleController.text = widget.task!.title!;
-      _descriptionController.text = widget.task!.subtitle!;
-      categoryController.text = widget.task!.category!;
+      _titleController.text = widget.task!.title;
+      _descriptionController.text = widget.task!.subtitle;
+      categoryController.text = widget.task!.category;
       _startTimeController.text = widget.task!.start_time!;
       _endTimeController.text = widget.task!.end_time!;
     }

@@ -8,6 +8,8 @@ import '../view/Home.dart';
 import '../view/model/category_model.dart';
 
 class category extends StatefulWidget {
+  const category({super.key});
+
   @override
   _categoryState createState() => _categoryState();
 }
@@ -87,7 +89,7 @@ class _categoryState extends State<category> {
         builder: (BuildContext context) {
           return Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Container(
+            child: SizedBox(
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 0.8,
               child: SingleChildScrollView(

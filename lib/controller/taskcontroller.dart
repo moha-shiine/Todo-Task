@@ -17,8 +17,8 @@ class TasksController extends GetxController {
             title TEXT,
             category TEXT, 
             subtitle TEXT, 
-            start_time TEXT,  // Fixed column name
-            end_time TEXT,    // Fixed column name
+            start_time TEXT,
+            end_time TEXT,
             timeTask TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
           )
           """,
@@ -42,9 +42,7 @@ class TasksController extends GetxController {
         task,
         conflictAlgorithm: sql.ConflictAlgorithm.replace,
       );
-
       await getTasks();
-      print(tasks);
     } catch (e) {
       print("Error inserting task: $e");
     }
@@ -54,9 +52,7 @@ class TasksController extends GetxController {
     try {
       final db = await _db();
       final data = await db.query('tasks');
-
       tasks.assignAll(data.map((task) => Taskmodel.fromJson(task)).toList());
-      print(tasks);
     } catch (e) {
       print("Error fetching tasks: $e");
     }
@@ -79,15 +75,12 @@ class TasksController extends GetxController {
   Future<void> updateTask(Taskmodel task) async {
     try {
       final db = await _db();
-
-      // Ensure correct column names are used
       await db.update(
         'tasks',
         task.toJson(),
         where: 'id = ?',
         whereArgs: [task.id],
       );
-
       await getTasks();
     } catch (e) {
       print("Error updating task: $e");
