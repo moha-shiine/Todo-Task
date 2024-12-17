@@ -184,23 +184,23 @@ class _DateTimePickerWithStartEndTimeState
                       decoration: const InputDecoration(hintText: "Category"),
                     ),
                     const Gap(16),
-                    // TextFeildWidget(
-                    //   hinText: 'Pick Start Time',
-                    //   onTap: () => _pickTime(context, _startTimeController,
-                    //       isStartTime: true),
-                    //   controller: _startTimeController,
-                    //   preficicon: IconlyLight.timeSquare,
-                    // ),
-                    TextField(
+                    TextFeildWidget(
+                      hinText: 'Pick Start Time',
                       onTap: () => _pickTime(context, _startTimeController,
                           isStartTime: true),
                       controller: _startTimeController,
-                      decoration: const InputDecoration(
-                          suffixIcon: Icon(
-                            IconlyLight.timeSquare,
-                          ),
-                          hintText: "Category"),
+                      preficicon: IconlyLight.timeSquare,
                     ),
+                    // TextField(
+                    //   onTap: () => _pickTime(context, _startTimeController,
+                    //       isStartTime: true),
+                    //   controller: _startTimeController,
+                    //   decoration: const InputDecoration(
+                    //       suffixIcon: Icon(
+                    //         IconlyLight.timeSquare,
+                    //       ),
+                    //       hintText: "Category"),
+                    // ),
                     const Gap(16),
                     TextFeildWidget(
                       hinText: 'Pick End Time',

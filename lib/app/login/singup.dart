@@ -128,12 +128,13 @@ class _SinupWigetState extends State<SinupWiget> {
                 ),
                 onPressed: () {
                   validateAndSave();
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => OtpScreen()));
+
                   if (widget.passwordController.passwordsMatch &&
                       widget.passwordController.hasMinLength &&
                       widget.passwordController.hasNumber &&
                       widget.passwordController.hasUpperAndLower) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => OtpScreen()));
                     // Perform sign-up logic
                     Get.snackbar('Success', 'Sign Up Complete!',
                         snackPosition: SnackPosition.BOTTOM,

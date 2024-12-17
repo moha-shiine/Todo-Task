@@ -43,29 +43,33 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Obx(() {
                 return SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Gap(10),
                         Card(
-                          elevation: 4,
+                          elevation: 1,
                           color: Colorthem.thirtColor,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Gap(10),
-                              Text(
-                                DateFormat('MMMM d').format(currentDate),
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colorthem.SecondryColor,
-                                  fontWeight: FontWeight.bold,
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Text(
+                                  DateFormat('MMMM d').format(currentDate),
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    color: Colorthem.SecondryColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                               Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
+                                    const EdgeInsets.symmetric(horizontal: 16),
                                 child: Text(
                                   DateFormat('yyyy').format(currentDate),
                                   style: const TextStyle(
@@ -83,129 +87,120 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         const Gap(10),
                         ListView.builder(
-                          reverse: false,
+                          reverse: true,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: tasksController.tasks.length,
                           itemBuilder: (context, index) {
                             final task = tasksController.tasks[index];
-                            return InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            TaskEditPage(task: task)));
-                              },
-                              child: Container(
-                                margin: const EdgeInsets.symmetric(vertical: 8),
-                                height: 145,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(26),
-                                  border: Border.all(
-                                    color: Colorthem.SecondryColor,
-                                    width: 1,
-                                  ),
+                            return Container(
+                              margin: const EdgeInsets.symmetric(vertical: 8),
+                              height: 145,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(26),
+                                border: Border.all(
+                                  color: Colorthem.SecondryColor,
+                                  width: 1,
                                 ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Gap(10),
-                                    ListTile(
-                                      title: Text(
-                                        task.title.toString(),
-                                        style: const TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      minVerticalPadding: 10,
-                                      isThreeLine: true,
-                                      trailing: Text(
-                                        task.timeTask.toString(),
-                                        style: const TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      subtitle: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            task.subtitle.toString(),
-                                            style: const TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                          const Gap(2),
-                                          Text(
-                                            '${task.start_time}, ${task.end_time}',
-                                            style: const TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Gap(10),
+                                  ListTile(
+                                    title: Text(
+                                      task.title.toString(),
+                                      style: const TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    const Gap(10),
-                                    Row(
+                                    minVerticalPadding: 10,
+                                    isThreeLine: true,
+                                    trailing: Text(
+                                      task.timeTask.toString(),
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    subtitle: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 17),
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            height: 30,
-                                            width: 110,
-                                            decoration: BoxDecoration(
-                                              color: Colorthem.SecondryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                            child: const Center(
-                                              child: Text(
-                                                "Complete",
-                                                style: TextStyle(
-                                                  color: Colorthem.thirtColor,
-                                                  fontSize: 14,
-                                                ),
+                                        Text(
+                                          task.subtitle.toString(),
+                                          style: const TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        const Gap(2),
+                                        Text(
+                                          '${task.start_time}, ${task.end_time}',
+                                          style: const TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const Gap(10),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 17),
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          height: 30,
+                                          width: 110,
+                                          decoration: BoxDecoration(
+                                            color: Colorthem.SecondryColor,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: const Center(
+                                            child: Text(
+                                              "Complete",
+                                              style: TextStyle(
+                                                color: Colorthem.thirtColor,
+                                                fontSize: 14,
                                               ),
                                             ),
                                           ),
                                         ),
-                                        const Spacer(),
-                                        InkWell(
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        TaskEditPage(
-                                                            task: task)));
-                                          },
-                                          child: Icon(
-                                            IconlyLight.editSquare,
-                                            color: Colorthem.PrimaryColor,
-                                          ),
+                                      ),
+                                      const Spacer(),
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      TaskEditPage(
+                                                          task: task)));
+                                        },
+                                        child: Icon(
+                                          IconlyLight.editSquare,
+                                          color: Colorthem.PrimaryColor,
                                         ),
-                                        const Gap(10),
-                                        InkWell(
-                                          onTap: () => tasksController
-                                              .deleteTask(task.id),
-                                          child: Icon(
-                                            IconlyLight.delete,
-                                            color: Colorthem.SecondryColor,
-                                          ),
+                                      ),
+                                      const Gap(10),
+                                      InkWell(
+                                        onTap: () =>
+                                            tasksController.deleteTask(task.id),
+                                        child: Icon(
+                                          IconlyLight.delete,
+                                          color: Colorthem.SecondryColor,
                                         ),
-                                        const Gap(10),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                      ),
+                                      const Gap(10),
+                                    ],
+                                  ),
+                                ],
                               ),
                             );
                           },

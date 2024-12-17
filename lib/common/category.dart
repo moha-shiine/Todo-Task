@@ -38,7 +38,7 @@ class _categoryState extends State<category> {
     setState(() {
       selelctindex = index;
       _showBottomSheet(index);
-      _showBottomSheet(index);
+      _showBottomSheet(1);
     });
   }
 
@@ -74,6 +74,18 @@ class _categoryState extends State<category> {
                     index: 2,
                     onTap: handleItemTap,
                     isSelected: selelctindex == 2),
+                HeadWidget(
+                    icon: IconlyLight.profile,
+                    title: "Person",
+                    index: 3,
+                    onTap: handleItemTap,
+                    isSelected: selelctindex == 3),
+                HeadWidget(
+                    icon: Icons.done,
+                    title: "Work",
+                    index: 4,
+                    onTap: handleItemTap,
+                    isSelected: selelctindex == 4),
               ],
             ),
           ),

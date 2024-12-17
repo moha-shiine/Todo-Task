@@ -15,7 +15,7 @@ Widget dataCalenderWidget(
       showHeader: false,
       padding: EdgeInsets.only(
         top: 0,
-        left: 20,
+        left: 13,
         bottom: 0,
         right: 0,
       ),
@@ -24,7 +24,7 @@ Widget dataCalenderWidget(
       //       color: Colors.red, fontSize: 16, fontWeight: FontWeight.w600),
     ),
     dayProps: const EasyDayProps(
-        height: 60.0,
+        height: 50.0,
         width: 60.0,
         activeDayStyle: DayStyle(
           borderRadius: 10.0,
