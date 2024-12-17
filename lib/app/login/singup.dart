@@ -18,7 +18,6 @@ class SinupWiget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      // Make the content scrollable
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -36,9 +35,6 @@ class SinupWiget extends StatelessWidget {
             icon: Icons.lock_outline,
             onChanged: passwordController.updateConfirmPassword,
           ),
-          //  const SizedBox(height: 10),
-
-          // Real-time Validation Feedback
           Obx(
             () => Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,7 +118,6 @@ class SinupWiget extends StatelessWidget {
               ],
             ),
           ),
-
           const SizedBox(height: 20),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -152,9 +147,6 @@ class SinupWiget extends StatelessWidget {
             ),
           ),
         ],
-        //    ),
-        //   ],
-        // ),
       ),
     );
   }

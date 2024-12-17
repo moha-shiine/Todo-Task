@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:taskapp/controller/PasswordValidationController.dart';
 import 'package:taskapp/widget/bottom/CustomInputFields.dart';
 import 'package:taskapp/widget/bottom/socilaloginbotoom.dart';
-
 import 'singup.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -17,8 +16,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _isPasswordVisible = false; // Track password visibility
-
   final passwordController = Get.put(PasswordValidationController());
+
   void _togglePasswordVisibility() {
     setState(() {
       _isPasswordVisible = !_isPasswordVisible; // Toggle password visibility
@@ -26,8 +25,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   final _formKey = GlobalKey<FormState>();
-  String _email = '';
-  String _password = '';
 
   void validateAndSave() {
     final form = _formKey.currentState;
@@ -40,62 +37,74 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey.shade200,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 20),
-                Center(
-                  child: Image.asset(
-                    "assets/log.png",
-                    scale: 0.8,
-                  ),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: Column(
+            children: [
+              const SizedBox(height: 20),
+              Center(
+                child: Image.asset(
+                  "assets/log.png",
+                  scale: 0.8,
                 ),
-                Gap(20),
-                Center(
-                  child: Text(
-                    'Welcome to Tasktugas ',
-                    style: GoogleFonts.poppins(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600),
-                  ),
+              ),
+              const Gap(20),
+              Center(
+                child: Text(
+                  'Welcome to Tasktugas',
+                  style: GoogleFonts.poppins(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600),
                 ),
-                const SizedBox(height: 6),
-                Center(
-                  child: Text(
-                    'Sign up or login below to manage your\nproject, task, and productivity',
-                    textAlign: TextAlign.center,
-                    style:
-                        GoogleFonts.poppins(fontSize: 14, color: Colors.black),
-                  ),
+              ),
+              const SizedBox(height: 6),
+              Center(
+                child: Text(
+                  'Sign up or login below to manage your\nproject, task, and productivity',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
                 ),
-                const SizedBox(height: 20),
-                // Tabs for Login and Sign Up
-                DefaultTabController(
-                  length: 2,
-                  child: Column(
-                    children: [
-                      const TabBar(
-                        indicatorColor: Colors.green,
-                        labelColor: Colors.green,
-                        unselectedLabelColor: Colors.black45,
-                        tabs: [
-                          Tab(text: 'Login'),
-                          Tab(text: 'Sign Up'),
-                        ],
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height *
-                            0.7, // Adjust height dynamically
-                        child: TabBarView(children: [
-                          // Login Tab
+              ),
+              Gap(20)
+            ],
+          ),
+          toolbarHeight: 180,
+        ),
+        backgroundColor: Colors.grey.shade200,
+        body: SafeArea(
+          child: SingleChildScrollView(
+            // padding: const EdgeInsets.all(20),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // DefaultTabController wraps both TabBar and TabBarView
+                  Container(
+                    color: Colors.white,
+                    child: const TabBar(
+                      //  isScrollable: true,
+                      indicatorColor: Colors.green,
+                      labelColor: Colors.green,
+                      unselectedLabelColor: Colors.black45,
+                      tabs: [
+                        Tab(text: 'Login'),
+                        Tab(text: 'Sign Up'),
+                      ],
+                    ),
+                  ),
+                  Gap(20),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.7,
+                      child: TabBarView(
+                        children: [
+                          // Login Tab Content
                           SingleChildScrollView(
                             child: Column(
                               children: [
@@ -108,8 +117,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 SocialLoginButton(
                                     icon: Icons.g_translate,
                                     text: 'Login with Google',
-                                    color: Colors.red),
-                                const SizedBox(height: 10),
+                                    color: Colors.black),
+                                const SizedBox(height: 20),
                                 Row(
                                   children: [
                                     const Expanded(
@@ -119,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10),
-                                      child: Text('or with continue with email',
+                                      child: Text('or continue with email',
                                           style: GoogleFonts.poppins()),
                                     ),
                                     const Expanded(
@@ -128,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             thickness: 1)),
                                   ],
                                 ),
-                                const SizedBox(height: 20),
+                                const SizedBox(height: 35),
                                 CustomInputFields(
                                   validator: (value) => value!.isEmpty
                                       ? 'Email cannot be blank'
@@ -141,16 +150,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                   validator: (value) => value!.isEmpty
                                       ? 'Password cannot be blank'
                                       : null,
-                                  obscureText:
-                                      !_isPasswordVisible, // Use the visibility state
+                                  obscureText: !_isPasswordVisible,
                                   suffixIcon: IconButton(
                                     icon: Icon(
                                       _isPasswordVisible
                                           ? Icons.visibility
                                           : Icons.visibility_off,
                                     ),
-                                    onPressed:
-                                        _togglePasswordVisibility, // Toggle visibility
+                                    onPressed: _togglePasswordVisibility,
                                   ),
                                   hint: 'Enter your password',
                                   icon: Icons.lock_outline,
@@ -182,14 +189,15 @@ class _LoginScreenState extends State<LoginScreen> {
                               ],
                             ),
                           ),
-                          // Sign Up Tab
+
+                          // Sign-Up Tab Content
                           SinupWiget(passwordController: passwordController),
-                        ]),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
