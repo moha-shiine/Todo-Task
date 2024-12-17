@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: GoogleFonts.poppins(
                       fontSize: 20,
                       color: Colors.black,
-                      fontWeight: FontWeight.w600),
+                      fontWeight: FontWeight.w500),
                 ),
               ),
               const SizedBox(height: 6),
@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Text(
                   'Sign up or login below to manage your\nproject, task, and productivity',
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
+                  style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),
                 ),
               ),
               Gap(20)
@@ -164,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 const SizedBox(height: 10),
                                 Align(
-                                  alignment: Alignment.centerRight,
+                                  alignment: Alignment.centerLeft,
                                   child: Text(
                                     'Forgot Password?',
                                     style: GoogleFonts.poppins(
@@ -177,6 +177,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.green,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
                                     minimumSize:
                                         const Size(double.infinity, 50),
                                   ),
@@ -184,7 +187,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     validateAndSave();
                                   },
                                   child: const Text('Login',
-                                      style: TextStyle(color: Colors.white)),
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 20)),
                                 ),
                               ],
                             ),
