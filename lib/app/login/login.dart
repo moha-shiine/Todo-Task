@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taskapp/controller/PasswordValidationController.dart';
@@ -51,24 +52,28 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 const SizedBox(height: 20),
                 Center(
-                  child: Text(
-                    'Tasktugas',
-                    style: GoogleFonts.poppins(
-                      fontSize: 32,
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: Image.asset(
+                    "assets/log.png",
+                    scale: 0.8,
                   ),
                 ),
-                const SizedBox(height: 10),
+                Gap(20),
                 Center(
                   child: Text(
-                    'Welcome to Tasktugas\nSign up or login below to manage your\nproject, task, and productivity',
-                    textAlign: TextAlign.center,
+                    'Welcome to Tasktugas ',
                     style: GoogleFonts.poppins(
-                      fontSize: 14,
-                      color: Colors.black54,
-                    ),
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Center(
+                  child: Text(
+                    'Sign up or login below to manage your\nproject, task, and productivity',
+                    textAlign: TextAlign.center,
+                    style:
+                        GoogleFonts.poppins(fontSize: 14, color: Colors.black),
                   ),
                 ),
                 const SizedBox(height: 20),
