@@ -31,13 +31,13 @@ class _OtpScreenState extends State<OtpScreen> {
             const SizedBox(height: 20),
             Text(
               "Enter Verification  Code",
-              style: GoogleFonts.poppins(
+              style: GoogleFonts.roboto(
                   textStyle:
-                      TextStyle(fontSize: 25, fontWeight: FontWeight.w600)),
+                      TextStyle(fontSize: 27, fontWeight: FontWeight.w700)),
             ),
             Gap(6),
             Text("We have sent code to shiine12@gmail.com"),
-            Gap(20),
+            Gap(40),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
