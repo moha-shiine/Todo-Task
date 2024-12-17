@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:taskapp/app/login/OTP/Otp.dart';
 
 import 'package:taskapp/controller/PasswordValidationController.dart';
 import 'package:taskapp/widget/bottom/CustomInputFields.dart';
@@ -120,11 +121,15 @@ class _SinupWigetState extends State<SinupWiget> {
               offset: Offset(-0, -90),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
                   backgroundColor: Colors.green,
                   minimumSize: const Size(double.infinity, 50),
                 ),
                 onPressed: () {
                   validateAndSave();
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => OtpScreen()));
                   if (widget.passwordController.passwordsMatch &&
                       widget.passwordController.hasMinLength &&
                       widget.passwordController.hasNumber &&
