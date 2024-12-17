@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:taskapp/app/login/singup.dart';
 import 'package:taskapp/controller/PasswordValidationController.dart';
 import 'package:taskapp/widget/bottom/CustomInputFields.dart';
 import 'package:taskapp/widget/bottom/socilaloginbotoom.dart';
+
+import 'singup.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -15,30 +15,30 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool _isPasswordVisible = false; // Track password visibility
+
+  final passwordController = Get.put(PasswordValidationController());
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isPasswordVisible = !_isPasswordVisible; // Toggle password visibility
+    });
+  }
+
+  final _formKey = GlobalKey<FormState>();
+  String _email = '';
+  String _password = '';
+
+  void validateAndSave() {
+    final form = _formKey.currentState;
+    if (form!.validate()) {
+      print('Form is valid');
+    } else {
+      print('Form is invalid');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    bool _isPasswordVisible = false; // Track password visibility
-
-    void _togglePasswordVisibility() {
-      setState(() {
-        _isPasswordVisible = !_isPasswordVisible; // Toggle password visibility
-      });
-    }
-
-    final _formKey = new GlobalKey<FormState>();
-    String _email;
-    String _password;
-
-    void validateAndSave() {
-      final form = _formKey.currentState;
-      if (form!.validate()) {
-        print('Form is valid');
-      } else {
-        print('form is invalid');
-      }
-    }
-
-    final passwordController = Get.put(PasswordValidationController());
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       body: SafeArea(
@@ -92,7 +92,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: TabBarView(children: [
                           // Login Tab
                           SingleChildScrollView(
-                            // Make the content scrollable
                             child: Column(
                               children: [
                                 const SizedBox(height: 20),
@@ -126,30 +125,31 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 const SizedBox(height: 20),
                                 CustomInputFields(
-                                    validator: (value) => value!.isEmpty
-                                        ? 'Email cannot be blank'
-                                        : null,
-                                    //
-                                    //  controller: TextEditingController(),
-                                    hint: 'Enter your email',
-                                    icon: Icons.email_outlined),
+                                  validator: (value) => value!.isEmpty
+                                      ? 'Email cannot be blank'
+                                      : null,
+                                  controller: TextEditingController(),
+                                  hint: 'Enter your email',
+                                  icon: Icons.email_outlined,
+                                ),
                                 CustomInputFields(
-                                    validator: (value) => value!.isEmpty
-                                        ? 'Password cannot be blank'
-                                        : null,
-                                    //onSaved: (value) => _password = value,
-                                    obscureText: !_isPasswordVisible,
-                                    suffixIcon: IconButton(
-                                      icon: Icon(
-                                        _isPasswordVisible
-                                            ? Icons.visibility
-                                            : Icons.visibility_off,
-                                      ),
-                                      onPressed:
-                                          _togglePasswordVisibility, // Toggle visibility
+                                  validator: (value) => value!.isEmpty
+                                      ? 'Password cannot be blank'
+                                      : null,
+                                  obscureText:
+                                      !_isPasswordVisible, // Use the visibility state
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _isPasswordVisible
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
                                     ),
-                                    hint: 'Enter your password',
-                                    icon: Icons.lock_outline),
+                                    onPressed:
+                                        _togglePasswordVisibility, // Toggle visibility
+                                  ),
+                                  hint: 'Enter your password',
+                                  icon: Icons.lock_outline,
+                                ),
                                 const SizedBox(height: 10),
                                 Align(
                                   alignment: Alignment.centerRight,
@@ -177,7 +177,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               ],
                             ),
                           ),
-
                           // Sign Up Tab
                           SinupWiget(passwordController: passwordController),
                         ]),
@@ -193,31 +192,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
-// class CustomInputField extends StatelessWidget {
-//   final String hint;
-//   final IconData icon;
-
-//   const CustomInputField({
-//     super.key,
-//     required this.hint,
-//     required this.icon,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       margin: const EdgeInsets.symmetric(vertical: 10),
-//       child: TextField(
-//         decoration: InputDecoration(
-//           hintText: hint,
-//           prefixIcon: Icon(icon, color: Colors.black54),
-//           border: OutlineInputBorder(
-//             borderRadius: BorderRadius.circular(10),
-//             borderSide: const BorderSide(color: Colors.black26),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
