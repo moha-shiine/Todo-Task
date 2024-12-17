@@ -16,7 +16,9 @@ class SocialLoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       style: ElevatedButton.styleFrom(
-        backgroundColor: color.withOpacity(0.1),
+        //  shadowColor: Colors.black54,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        backgroundColor: Colors.white,
         minimumSize: const Size(double.infinity, 50),
       ),
       icon: Icon(icon, color: color),
