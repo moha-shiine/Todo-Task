@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import 'package:taskapp/color/them.dart';
+import 'package:taskapp/controller/taskcontroller.dart';
 
 import '../view/model/category_model.dart';
 
@@ -12,6 +15,8 @@ class category extends StatefulWidget {
   @override
   _categoryState createState() => _categoryState();
 }
+
+final TasksController tasksController = Get.put(TasksController());
 
 // ignore: camel_case_types
 class _categoryState extends State<category> {
@@ -47,10 +52,6 @@ class _categoryState extends State<category> {
     return SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(children: [
-          // int index = entry.key;
-          //  categoryMoldel task = entry.value;
-
-          //   onTap: () => toggleSelection(index), // Toggle selection on tap
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6),
             child: Row(

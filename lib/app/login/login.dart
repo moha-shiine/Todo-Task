@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:taskapp/controller/PasswordValidationController.dart';
 import 'package:taskapp/widget/bottom/CustomInputFields.dart';
 import 'package:taskapp/widget/bottom/socilaloginbotoom.dart';
+import '../../view/Home.dart';
 import 'singup.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -15,12 +16,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool _isPasswordVisible = false; // Track password visibility
+  bool _isPasswordVisible = false;
   final passwordController = Get.put(PasswordValidationController());
 
   void _togglePasswordVisibility() {
     setState(() {
-      _isPasswordVisible = !_isPasswordVisible; // Toggle password visibility
+      _isPasswordVisible = !_isPasswordVisible;
     });
   }
 
@@ -77,17 +78,15 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.grey.shade200,
         body: SafeArea(
           child: SingleChildScrollView(
-            // padding: const EdgeInsets.all(20),
+            scrollDirection: Axis.horizontal,
             child: Form(
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // DefaultTabController wraps both TabBar and TabBarView
                   Container(
                     color: Colors.white,
                     child: const TabBar(
-                      //  isScrollable: true,
                       indicatorColor: Colors.green,
                       labelColor: Colors.green,
                       unselectedLabelColor: Colors.black45,
@@ -104,7 +103,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: MediaQuery.of(context).size.height * 0.7,
                       child: TabBarView(
                         children: [
-                          // Login Tab Content
                           SingleChildScrollView(
                             child: Column(
                               children: [
@@ -185,6 +183,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   onPressed: () {
                                     validateAndSave();
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => HomeScreen()));
                                   },
                                   child: const Text('Login',
                                       style: TextStyle(

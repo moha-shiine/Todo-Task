@@ -115,7 +115,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   width: 64,
                   child: TextFormField(
                     onChanged: (value) {
-                      if (value.length == 1 || value.length < 1) {
+                      if (value.length == 1 || value.isEmpty) {
                         FocusScope.of(context).nextFocus();
                       }
                     },
